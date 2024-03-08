@@ -1,0 +1,4 @@
+/home/barloz/Programming/SpaceShips/build/CMakeFiles/SpaceShips-lib.dir
+/home/barloz/Programming/SpaceShips/build/CMakeFiles/SpaceShips.dir
+/home/barloz/Programming/SpaceShips/build/CMakeFiles/edit_cache.dir
+/home/barloz/Programming/SpaceShips/build/CMakeFiles/rebuild_cache.dir

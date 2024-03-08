@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/SpaceShips.dir/main.cpp.o -o SpaceShips  -lsfml-graphics -lsfml-window -lsfml-system libSpaceShips-lib.a 

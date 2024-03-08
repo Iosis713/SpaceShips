@@ -31,8 +31,11 @@ int main()
             }
         }
         
+        moveable1.accelerate();
         moveable1.changeDirection();
-            
+        moveable1.updatePosition();
+
+
         sprite1.draw(window);
         moveable1.draw(window);
         

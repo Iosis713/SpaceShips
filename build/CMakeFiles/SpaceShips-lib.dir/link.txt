@@ -1,0 +1,2 @@
+/usr/bin/ar qc libSpaceShips-lib.a CMakeFiles/SpaceShips-lib.dir/Source/Sprite.cpp.o CMakeFiles/SpaceShips-lib.dir/Source/Moveable.cpp.o
+/usr/bin/ranlib libSpaceShips-lib.a
