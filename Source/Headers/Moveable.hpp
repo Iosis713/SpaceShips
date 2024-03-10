@@ -7,23 +7,20 @@
 
 class Moveable : public Sprite
 {
-protected:
-    float acceleration_ = 0.1f;
+protected:  
     float maxSpeed_ = 6.f;
-    float rotationSpeed_ = 2.f; //deg
     float speed_ = 0.f;
     sf::Vector2f velocity_{0.f, 0.f};
     
 public:
     Moveable();
     Moveable(sf::Vector2f position);
+    Moveable(sf::Vector2f position, float rotation);
+    Moveable(sf::Vector2f position, float rotation, float maxSpeed, float speed);
 
     virtual ~Moveable() = default;
     
-    void accelerate();
-    void changeDirection();
     void updatePosition();
-
 
     float getSpeed() const;
     float getRotation() const;

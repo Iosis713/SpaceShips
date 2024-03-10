@@ -1,12 +1,31 @@
 #include "Headers/Moveable.hpp"
 
+Moveable::Moveable(sf::Vector2f position, float rotation, float maxSpeed, float speed)
+    : Sprite(position, rotation)
+    , maxSpeed_(maxSpeed)
+    , speed_(speed)
+{
+    rectangle_.setOrigin(size_.x/2, size_.y/2);
+    rectangle_.setFillColor(sf::Color::Red);
+    rectangle_.setSize(size_);
+    rectangle_.setPosition(position_);
+}
+
+Moveable::Moveable(sf::Vector2f position, float rotation)
+    : Sprite(position, rotation)
+{
+    rectangle_.setOrigin(size_.x/2, size_.y/2);
+    rectangle_.setFillColor(sf::Color::Red);
+    rectangle_.setSize(size_);
+    rectangle_.setPosition(position_);
+}
+
 Moveable::Moveable()
 {
     rectangle_.setOrigin(size_.x/2, size_.y/2);
     rectangle_.setFillColor(sf::Color::Red);
     rectangle_.setSize(size_);
     rectangle_.setPosition(position_);
-    rectangle_.setRotation(180.f);
 }
 
 Moveable::Moveable(sf::Vector2f position)
@@ -16,49 +35,6 @@ Moveable::Moveable(sf::Vector2f position)
     rectangle_.setFillColor(sf::Color::Red);
     rectangle_.setSize(size_);
     rectangle_.setPosition(position_);
-    rectangle_.setRotation(180.f);
-}
-
-void Moveable::accelerate()
-{
-    //speed up
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) and
-       speed_ < maxSpeed_)
-    {
-        if(speed_ >= maxSpeed_ - acceleration_)
-        {
-            speed_ = maxSpeed_;
-        }
-        else
-        {
-            speed_ += acceleration_;
-        }
-    }
-    //slow down
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) and
-       speed_ > 0.f)
-    {
-        if(speed_ < acceleration_)
-        {
-            speed_ = 0.f;
-        }
-        else
-        {
-            speed_ -= acceleration_;
-        }
-    }
-}
-
-void Moveable::changeDirection()
-{
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-    {
-        rectangle_.setRotation(rectangle_.getRotation() - rotationSpeed_);
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-    {
-        rectangle_.setRotation(rectangle_.getRotation() + rotationSpeed_);
-    }
 }
 
 void Moveable::updatePosition()
@@ -71,7 +47,7 @@ void Moveable::updatePosition()
 
     position_ += velocity_;
     
-    cout << rectangle_.getRotation() << '\n';
+    //cout << rectangle_.getRotation() << '\n';
     //cout << position_.x << ", " << position_.y << '\n';
 }
 

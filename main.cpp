@@ -4,7 +4,7 @@
 
 #include "Source/Headers/Sprite.hpp"
 #include "Source/Headers/Moveable.hpp"
-
+#include "Source/Headers/Controllable.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
@@ -16,7 +16,7 @@ int main()
     
     Sprite sprite1;
     
-    Moveable moveable1(sf::Vector2f(600.f, 700.f));
+    Controllable controllable1(sf::Vector2f(600.f, 700.f));
 
     while(window.isOpen())
     {
@@ -31,15 +31,15 @@ int main()
             }
         }
         
-        moveable1.accelerate();
-        moveable1.changeDirection();
-        moveable1.updatePosition();
+        controllable1.accelerate();
+        controllable1.changeDirection();
+        controllable1.updatePosition();
 
 
         sprite1.draw(window);
-        moveable1.draw(window);
+        controllable1.draw(window);
         
-        //std::cout << moveable1.getRotation() << '\n';
+        //std::cout << controllable1.getRotation() << '\n';
 
         window.display();
         {

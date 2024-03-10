@@ -15,6 +15,7 @@ protected:
 public:
     Sprite();
     Sprite(sf::Vector2f position);
+    Sprite(sf::Vector2f position, float rotation);
     virtual ~Sprite() = default;
     
     virtual void draw(sf::RenderWindow& i_window);
