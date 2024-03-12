@@ -11,7 +11,9 @@ set(SFML_LIB    sfml-graphics
 
 set(SRC         Source/Sprite.cpp
                 Source/Moveable.cpp
-                Source/Controllable.cpp)
+                Source/Controllable.cpp
+                Source/Bullet.cpp
+                Source/Spaceship.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC  ${SRC})
 

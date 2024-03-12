@@ -1,7 +1,7 @@
 #include "Headers/Moveable.hpp"
 
-Moveable::Moveable(sf::Vector2f position, float rotation, float maxSpeed, float speed)
-    : Sprite(position, rotation)
+Moveable::Moveable(sf::Vector2f position, float rotation, sf::Vector2f size, float maxSpeed, float speed)
+    : Sprite(position, rotation, size)
     , maxSpeed_(maxSpeed)
     , speed_(speed)
 {
@@ -9,16 +9,30 @@ Moveable::Moveable(sf::Vector2f position, float rotation, float maxSpeed, float 
     rectangle_.setFillColor(sf::Color::Red);
     rectangle_.setSize(size_);
     rectangle_.setPosition(position_);
+    rectangle_.setRotation(rotation);
 }
 
-Moveable::Moveable(sf::Vector2f position, float rotation)
-    : Sprite(position, rotation)
+Moveable::Moveable(sf::Vector2f position, float rotation, float maxSpeed, float speed)
+    : Sprite(position)
+    , maxSpeed_(maxSpeed)
+    , speed_(speed)
 {
     rectangle_.setOrigin(size_.x/2, size_.y/2);
     rectangle_.setFillColor(sf::Color::Red);
     rectangle_.setSize(size_);
     rectangle_.setPosition(position_);
+    rectangle_.setRotation(rotation);
 }
+
+Moveable::Moveable(sf::Vector2f position, float rotation)
+    : Sprite(position)
+{
+    rectangle_.setOrigin(size_.x/2, size_.y/2);
+    rectangle_.setFillColor(sf::Color::Red);
+    rectangle_.setSize(size_);
+    rectangle_.setPosition(position_);
+    rectangle_.setRotation(rotation);
+}   
 
 Moveable::Moveable()
 {
@@ -41,14 +55,11 @@ void Moveable::updatePosition()
 {
     float angle = rectangle_.getRotation() * M_PI / 180; // deg to radians
     using namespace std;
-
-    velocity_.x = -speed_ * sin(angle);
-    velocity_.y = speed_ * cos(angle);
-
-    position_ += velocity_;
-    
-    //cout << rectangle_.getRotation() << '\n';
-    //cout << position_.x << ", " << position_.y << '\n';
+    {
+    velocity_.x = round(-speed_ * sin(angle));
+    velocity_.y = round(speed_ * cos(angle));
+    }
+    position_ += velocity_;    
 }
 
 /*______________________GETTERS__________________________________*/

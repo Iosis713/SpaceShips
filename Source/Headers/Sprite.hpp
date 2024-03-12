@@ -1,4 +1,6 @@
 #pragma once
+#ifndef SPRITE
+#define SPRITE
 
 #include <iostream>
 #include "Global.hpp"
@@ -16,6 +18,7 @@ public:
     Sprite();
     Sprite(sf::Vector2f position);
     Sprite(sf::Vector2f position, float rotation);
+    Sprite(sf::Vector2f position, float rotation, sf::Vector2f size);
     virtual ~Sprite() = default;
     
     virtual void draw(sf::RenderWindow& i_window);
@@ -26,4 +29,6 @@ public:
     void setPosition(sf::Vector2f const newPos);
 
 };
+
+#endif
 

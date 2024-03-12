@@ -5,6 +5,8 @@
 #include "Source/Headers/Sprite.hpp"
 #include "Source/Headers/Moveable.hpp"
 #include "Source/Headers/Controllable.hpp"
+#include "Source/Headers/Bullet.hpp"
+#include "Source/Headers/Spaceship.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
@@ -16,7 +18,7 @@ int main()
     
     Sprite sprite1;
     
-    Controllable controllable1(sf::Vector2f(600.f, 700.f));
+    Spaceship spaceship;
 
     while(window.isOpen())
     {
@@ -31,15 +33,12 @@ int main()
             }
         }
         
-        controllable1.accelerate();
-        controllable1.changeDirection();
-        controllable1.updatePosition();
+        spaceship.accelerate();
+        spaceship.changeDirection();
+        spaceship.shoot();
+        spaceship.updatePosition();
 
-
-        sprite1.draw(window);
-        controllable1.draw(window);
-        
-        //std::cout << controllable1.getRotation() << '\n';
+        spaceship.draw(window);
 
         window.display();
         {

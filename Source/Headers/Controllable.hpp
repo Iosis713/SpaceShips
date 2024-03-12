@@ -15,6 +15,11 @@ public:
     Controllable();
     Controllable(sf::Vector2f position);
     Controllable(sf::Vector2f position, float rotation, float maxSpeed, float speed, float acceleration, float rotationSpeed);
+    Controllable(sf::Vector2f position, float rotation, sf::Vector2f size, float maxSpeed, float speed, float acceleration, float rotationSpeed);
+
+
+
+
 
     virtual ~Controllable() = default;
     

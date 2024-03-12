@@ -17,10 +17,11 @@ public:
     Moveable(sf::Vector2f position);
     Moveable(sf::Vector2f position, float rotation);
     Moveable(sf::Vector2f position, float rotation, float maxSpeed, float speed);
+    Moveable(sf::Vector2f position, float rotation, sf::Vector2f size, float maxSpeed, float speed);
 
     virtual ~Moveable() = default;
     
-    void updatePosition();
+    virtual void updatePosition();
 
     float getSpeed() const;
     float getRotation() const;
