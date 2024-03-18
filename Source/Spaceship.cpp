@@ -29,14 +29,22 @@ void Spaceship::draw(sf::RenderWindow& i_window)
     }
 }
 
-void Spaceship::updatePosition()
-{
-    Moveable::updatePosition();
-
+void Spaceship::organizeBullets()
+{   
     for(auto& bullet : bulletManager_)
     {
-        bullet->updatePosition();
+        if(bullet->getHP() <= 0)
+        {
+            bullet = nullptr;
+        }
     }
+
+    auto it = std::remove_if(bulletManager_.begin(), bulletManager_.end(), [&](const auto& bullet)
+            {
+                return (bullet == nullptr);
+            });
+
+    bulletManager_.erase(it, bulletManager_.end());
 }
 
 void Spaceship::shoot()
@@ -56,6 +64,20 @@ void Spaceship::shoot()
         shootAbility_ = true;
     }
 
+}
+
+void Spaceship::updatePosition()
+{
+    Moveable::updatePosition();
+
+    for(auto& bullet : bulletManager_)
+    {
+        bullet->updatePosition();
+        if(!bullet->isInMap())
+        {
+            bullet->setHP(0);
+        }
+    }
 }
 
 std::vector<std::unique_ptr<Bullet>>& Spaceship::getBulletManager()

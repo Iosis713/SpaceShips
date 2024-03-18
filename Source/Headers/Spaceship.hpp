@@ -24,9 +24,10 @@ public:
     virtual ~Spaceship() = default;
 
     void draw(sf::RenderWindow& i_window) override;
-    void updatePosition() override;
+    void organizeBullets();
     void shoot();
-    
+    void updatePosition() override;
+
     std::vector<std::unique_ptr<Bullet>>& getBulletManager();
 };
 

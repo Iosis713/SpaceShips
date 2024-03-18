@@ -44,7 +44,26 @@ void Sprite::draw(sf::RenderWindow& i_window)
     i_window.draw(rectangle_);
 }
 
+bool Sprite::isInMap()
+{
+    //checking if the center of the sprite is inside the map
+    if(position_.x >= 0 and position_.x <= SCREEN_WIDTH and
+       position_.y >= 0 and position_.y <= SCREEN_HEIGHT)
+    {   
+        return true;
+    }
+    else
+    {   
+        return false;
+    }
+}
+
 /*____________________GETTERS___________________________*/
+
+size_t Sprite::getHP() const
+{
+    return this->HP_;
+}
 
 sf::Vector2f Sprite::getPosition() const
 {
@@ -61,5 +80,10 @@ sf::Vector2f Sprite::getSize() const
 void Sprite::setPosition(sf::Vector2f const newPos)
 {
     position_ = newPos;
+}
+
+void Sprite::setHP(size_t hp)
+{
+    HP_ = hp;
 }
 

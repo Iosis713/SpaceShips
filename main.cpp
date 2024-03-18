@@ -37,8 +37,9 @@ int main()
         spaceship.changeDirection();
         spaceship.shoot();
         spaceship.updatePosition();
-
+        spaceship.organizeBullets();
         spaceship.draw(window);
+
 
         window.display();
         {

@@ -22,10 +22,14 @@ public:
     virtual ~Sprite() = default;
     
     virtual void draw(sf::RenderWindow& i_window);
+    bool isInMap(); 
     
+    size_t getHP() const;
     sf::Vector2f getPosition() const;
     sf::Vector2f getSize() const;
+    
 
+    void setHP(size_t hp);   
     void setPosition(sf::Vector2f const newPos);
 
 };
