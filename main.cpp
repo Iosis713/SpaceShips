@@ -32,6 +32,8 @@ int main()
                 window.close();
             }
         }
+
+        sprite1.draw(window);
         
         spaceship.accelerate();
         spaceship.changeDirection();

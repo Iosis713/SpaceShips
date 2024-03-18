@@ -24,6 +24,39 @@ TEST(BulletsTest, killingTest)
     ASSERT_EQ(2, ship1.getBulletManager().size());
 }
 
+TEST(SpriteCollision, positiveTest1)
+{
+    std::unique_ptr<Sprite> sprite1 = std::make_unique<Sprite>(sf::Vector2f(200, 200));
+    std::unique_ptr<Sprite> sprite2 = std::make_unique<Sprite>(sf::Vector2f(215, 220));
+
+    ASSERT_TRUE(sprite1->checkCollision(sprite2));
+}
+
+TEST(SpriteCollision, positiveTest2)
+{
+    std::unique_ptr<Sprite> sprite1 = std::make_unique<Sprite>(sf::Vector2f(200, 200));
+    std::unique_ptr<Sprite> sprite2 = std::make_unique<Sprite>(sf::Vector2f(229, 229));
+
+    ASSERT_TRUE(sprite1->checkCollision(sprite2));
+}
+
+TEST(SpriteCollision, negativeTest1)
+{
+    std::unique_ptr<Sprite> sprite1 = std::make_unique<Sprite>(sf::Vector2f(200, 200));
+    std::unique_ptr<Sprite> sprite2 = std::make_unique<Sprite>(sf::Vector2f(235, 220));
+
+    ASSERT_FALSE(sprite1->checkCollision(sprite2));
+}
+
+
+TEST(SpriteCollision, negativeTest2)
+{
+    std::unique_ptr<Sprite> sprite1 = std::make_unique<Sprite>(sf::Vector2f(170, 170));
+    std::unique_ptr<Sprite> sprite2 = std::make_unique<Sprite>(sf::Vector2f(200, 200));
+
+    ASSERT_FALSE(sprite1->checkCollision(sprite2));
+}
+
 int main(int argc, char** argv)
 {
     testing::InitGoogleTest(&argc, argv);

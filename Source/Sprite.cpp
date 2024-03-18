@@ -38,6 +38,20 @@ Sprite::Sprite(sf::Vector2f position)
     rectangle_.setPosition(position_);
 }
 
+bool Sprite::checkCollision(const std::unique_ptr<Sprite>& sprite)
+{
+    if(rectangle_.getGlobalBounds().intersects(
+            sprite->getRectangle().getGlobalBounds()
+                ))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 void Sprite::draw(sf::RenderWindow& i_window)
 {   
     rectangle_.setPosition(position_);
@@ -68,6 +82,11 @@ size_t Sprite::getHP() const
 sf::Vector2f Sprite::getPosition() const
 {
     return this->position_;
+}
+
+sf::RectangleShape Sprite::getRectangle() const
+{
+    return this->rectangle_;
 }
 
 sf::Vector2f Sprite::getSize() const
