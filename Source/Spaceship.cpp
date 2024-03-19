@@ -18,19 +18,11 @@ Spaceship::Spaceship()
     rectangle_.setRotation(0.f);
 }
 
-void Spaceship::checkBulletsCollision(std::vector<std::unique_ptr<Sprite>>& vectorOfSprites)
+void Spaceship::checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites)
 {   
     for(auto& bullet : bulletManager_)
     {
-        for(auto& sprite : vectorOfSprites)
-        {
-            if(bullet->checkCollision(sprite))
-            {
-                --*bullet;
-                --*sprite;
-                std::cout << "Bullet collision!\n";
-            }
-        }
+        bullet->checkSpritesCollision(vectorOfSprites);
     }
 }
 
@@ -68,7 +60,7 @@ void Spaceship::shoot()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and
        shootAbility_)
     {
-        bulletManager_.push_back(std::make_unique<Bullet>(position_, Spaceship::getRotation()));
+        bulletManager_.push_back(std::make_shared<Bullet>(position_, Spaceship::getRotation()));
         previousShootTime_ = std::chrono::steady_clock::now();
         shootAbility_ = false;
     }
@@ -96,7 +88,7 @@ void Spaceship::updatePosition()
     }
 }
 
-std::vector<std::unique_ptr<Bullet>>& Spaceship::getBulletManager()
+std::vector<std::shared_ptr<Bullet>>& Spaceship::getBulletManager()
 {
     return this->bulletManager_;
 }

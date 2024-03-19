@@ -16,8 +16,8 @@ int main()
 {   
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SpaceShips");
     
-    std::vector<std::unique_ptr<Sprite>> spritesVec;
-    spritesVec.push_back(std::make_unique<Sprite>());
+    std::vector<std::shared_ptr<Sprite>> spritesVec;
+    spritesVec.push_back(std::make_shared<Sprite>());
     
     Spaceship spaceship;
 

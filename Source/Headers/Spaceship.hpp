@@ -13,7 +13,7 @@
 class Spaceship : public Controllable
 {
 protected:
-    std::vector<std::unique_ptr<Bullet>> bulletManager_;
+    std::vector<std::shared_ptr<Bullet>> bulletManager_;
     size_t bulletsQuantity_ = 20;
     unsigned deltaTime = 0; //ms
     bool shootAbility_ = true;
@@ -23,13 +23,14 @@ public:
     Spaceship();    
     virtual ~Spaceship() = default;
     
-    void checkBulletsCollision(std::vector<std::unique_ptr<Sprite>>& vectorOfSprites);
+    void checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites);
+    void checkSpaceshipCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites);
     void draw(sf::RenderWindow& i_window) override;
     void organizeBullets();
     void shoot();
     void updatePosition() override;
 
-    std::vector<std::unique_ptr<Bullet>>& getBulletManager();
+    std::vector<std::shared_ptr<Bullet>>& getBulletManager();
 };
 
 #endif

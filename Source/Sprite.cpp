@@ -38,7 +38,7 @@ Sprite::Sprite(sf::Vector2f position)
     rectangle_.setPosition(position_);
 }
 
-bool Sprite::checkCollision(const std::unique_ptr<Sprite>& sprite)
+bool Sprite::checkCollision(const std::shared_ptr<Sprite>& sprite)
 {
     if(rectangle_.getGlobalBounds().intersects(
             sprite->getRectangle().getGlobalBounds()
@@ -49,6 +49,18 @@ bool Sprite::checkCollision(const std::unique_ptr<Sprite>& sprite)
     else
     {
         return false;
+    }
+}
+
+void Sprite::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites)
+{
+    for(auto& sprite : vectorOfSprites)
+    {
+        if(checkCollision(sprite))
+        {
+            HP_--;
+            std::cout << "Sprite collision!\n";
+        }
     }
 }
 
@@ -114,7 +126,7 @@ Sprite& Sprite::operator--()
     return *this;
 }
 /*
-std::unique_ptr<Sprite>& Sprite::operator--()
+std::shared_ptr<Sprite>& Sprite::operator--()
 {
     HP_--;
     return *this;
