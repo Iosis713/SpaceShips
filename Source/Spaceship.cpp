@@ -18,6 +18,22 @@ Spaceship::Spaceship()
     rectangle_.setRotation(0.f);
 }
 
+void Spaceship::checkBulletsCollision(std::vector<std::unique_ptr<Sprite>>& vectorOfSprites)
+{   
+    for(auto& bullet : bulletManager_)
+    {
+        for(auto& sprite : vectorOfSprites)
+        {
+            if(bullet->checkCollision(sprite))
+            {
+                --*bullet;
+                --*sprite;
+                std::cout << "Bullet collision!\n";
+            }
+        }
+    }
+}
+
 void Spaceship::draw(sf::RenderWindow& i_window)
 {
     rectangle_.setPosition(position_);

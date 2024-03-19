@@ -31,10 +31,11 @@ public:
     sf::RectangleShape getRectangle() const;
     sf::Vector2f getSize() const;
     
-
     void setHP(size_t hp);   
     void setPosition(sf::Vector2f const newPos);
-
+    
+    Sprite& operator--();
+    //std::unique_ptr<Sprite>& operator--();
 };
 
 #endif

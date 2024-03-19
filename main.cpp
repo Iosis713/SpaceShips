@@ -16,7 +16,8 @@ int main()
 {   
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SpaceShips");
     
-    Sprite sprite1;
+    std::vector<std::unique_ptr<Sprite>> spritesVec;
+    spritesVec.push_back(std::make_unique<Sprite>());
     
     Spaceship spaceship;
 
@@ -33,12 +34,13 @@ int main()
             }
         }
 
-        sprite1.draw(window);
+        spritesVec[0]->draw(window);
         
         spaceship.accelerate();
         spaceship.changeDirection();
         spaceship.shoot();
         spaceship.updatePosition();
+        spaceship.checkBulletsCollision(spritesVec);
         spaceship.organizeBullets();
         spaceship.draw(window);
 

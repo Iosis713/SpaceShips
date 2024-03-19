@@ -106,3 +106,18 @@ void Sprite::setHP(size_t hp)
     HP_ = hp;
 }
 
+/*______________________OPERATORS_______________________*/
+
+Sprite& Sprite::operator--()
+{
+    HP_--;
+    return *this;
+}
+/*
+std::unique_ptr<Sprite>& Sprite::operator--()
+{
+    HP_--;
+    return *this;
+}
+*/
+

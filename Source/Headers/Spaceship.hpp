@@ -22,7 +22,8 @@ protected:
 public:
     Spaceship();    
     virtual ~Spaceship() = default;
-
+    
+    void checkBulletsCollision(std::vector<std::unique_ptr<Sprite>>& vectorOfSprites);
     void draw(sf::RenderWindow& i_window) override;
     void organizeBullets();
     void shoot();
