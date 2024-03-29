@@ -36,7 +36,6 @@ public:
     void setPosition(sf::Vector2f const newPos);
     
     Sprite& operator--();
-    //std::shared_ptr<Sprite>& operator--();
 };
 
 #endif

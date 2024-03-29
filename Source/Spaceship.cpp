@@ -10,12 +10,12 @@ Spaceship::Spaceship()
                   2.f) //rotationalSpeed
 {
     bulletManager_.reserve(bulletsQuantity_);
-
+    
     rectangle_.setOrigin(size_.x/2, size_.y/2);
     rectangle_.setFillColor(sf::Color::Magenta);
     rectangle_.setSize(size_);
     rectangle_.setPosition(position_);
-    rectangle_.setRotation(0.f);
+    rectangle_.setRotation(180.f);
 }
 
 void Spaceship::checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites)
@@ -23,6 +23,10 @@ void Spaceship::checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vect
     for(auto& bullet : bulletManager_)
     {
         bullet->checkSpritesCollision(vectorOfSprites);
+        if(bullet->getHP() <= 0 and bullet->isInMap())
+        {
+            points_++;
+        }
     }
 }
 
@@ -91,5 +95,10 @@ void Spaceship::updatePosition()
 std::vector<std::shared_ptr<Bullet>>& Spaceship::getBulletManager()
 {
     return this->bulletManager_;
+}
+
+size_t Spaceship::getPoints() const
+{
+    return this->points_;
 }
 

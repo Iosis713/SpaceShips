@@ -5,12 +5,12 @@ EnemiesManager::EnemiesManager()
     manager_.reserve(maxEnemies);
 }
 
-void EnemiesManager::addMoveable()
+void EnemiesManager::addMoveable(const size_t level)
 {
     manager_.push_back(std::make_shared<Moveable>(sf::Vector2f(static_cast<float>(getRandom()), -20),
                                                 static_cast<float>(getRandom() % 180),
-                                                6.f,
-                                                4.f));
+                                                level * 3.f,
+                                                level * 3.f));
 }
 
 void EnemiesManager::drawAll(sf::RenderWindow& i_window)
@@ -21,13 +21,13 @@ void EnemiesManager::drawAll(sf::RenderWindow& i_window)
     }
 }
 
-void EnemiesManager::organizeEnemies()
+void EnemiesManager::organizeEnemies(const size_t level)
 {
     deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousEnemyRelease).count();
     
     if(deltaTime > 200 and manager_.size() < maxEnemies)
     {
-        addMoveable();
+        addMoveable(level);
         previousEnemyRelease = std::chrono::steady_clock::now();
     }   
 

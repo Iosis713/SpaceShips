@@ -19,6 +19,8 @@ protected:
     bool shootAbility_ = true;
     std::chrono::time_point<std::chrono::steady_clock> previousShootTime_;
     const unsigned shootUnabilityTime_ = 150; //ms
+    size_t points_ = 0;
+
 public:
     Spaceship();    
     virtual ~Spaceship() = default;
@@ -31,6 +33,8 @@ public:
     void updatePosition() override;
 
     std::vector<std::shared_ptr<Bullet>>& getBulletManager();
+    size_t getPoints() const;
+        
 };
 
 #endif

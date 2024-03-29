@@ -23,9 +23,9 @@ protected:
 public:
     EnemiesManager();
     ~EnemiesManager() = default;
-    void addMoveable();
+    void addMoveable(const size_t level);
     void drawAll(sf::RenderWindow& i_window);
-    void organizeEnemies();
+    void organizeEnemies(const size_t level);
     void clearEnemies();
 
     Manager& getManager();

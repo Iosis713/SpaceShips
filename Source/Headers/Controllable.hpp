@@ -8,7 +8,7 @@ class Controllable : public Moveable
 {
 protected:
     float acceleration_ = 0.1f;
-    float rotationSpeed_ = 2.f; //deg
+    float rotationSpeed_ = 3.f; //deg
     sf::Vector2f velocity_{0.f, 0.f};
     
 public:
