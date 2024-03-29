@@ -59,7 +59,8 @@ void Sprite::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorO
         if(checkCollision(sprite))
         {
             HP_--;
-            std::cout << "Sprite collision!\n";
+            sprite->setHP(sprite->getHP() - 1);
+            //std::cout << "Sprite collision!\n";
         }
     }
 }
