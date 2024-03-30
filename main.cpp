@@ -54,7 +54,6 @@ int main()
             
         LVL_TEXT.setString("Level: " + std::to_string(LVL));
         POINTS_TEXT.setString("Points: " + std::to_string(spaceship.getPoints()));
-        //spritesVec[0]->draw(window);
         
         enemiesManager.organizeEnemies(LVL);
 
@@ -64,9 +63,13 @@ int main()
         spaceship.updatePosition();
         spaceship.checkBulletsCollision(enemiesManager.getManager());
         LVL = (spaceship.getPoints() / 10) + 1;
-        //std::cout << "LVL" << LVL << '\n';
-        //std::cout << "Points: " << spaceship.getPoints() << '\n';
+        //sprites speed increased if level is higher
         spaceship.checkSpritesCollision(enemiesManager.getManager());
+        if(!spaceship.isInMap())
+        {
+            --spaceship;
+        }
+    
         if(spaceship.getHP() <= 0)
         {
             using namespace std::chrono_literals;

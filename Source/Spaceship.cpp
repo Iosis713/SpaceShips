@@ -4,10 +4,10 @@ Spaceship::Spaceship()
     : Controllable(sf::Vector2f(static_cast<float>(SCREEN_WIDTH/2), static_cast<float>(SCREEN_HEIGHT/2)),
                   0.f, // rotation
                   sf::Vector2f(20.f, 40.f), //size
-                  8.f, //maxSpeed
+                  16.f, //maxSpeed
                   0.f, //speed
-                  0.1f, //acceleration
-                  2.f) //rotationalSpeed
+                  0.2f, //acceleration
+                  3.f) //rotationalSpeed
 {
     bulletManager_.reserve(bulletsQuantity_);
     
