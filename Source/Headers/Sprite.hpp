@@ -23,7 +23,7 @@ public:
     virtual ~Sprite() = default;
     
     bool checkCollision(const std::shared_ptr<Sprite>& sprite);  
-    void checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites);
+    virtual bool checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites);
     virtual void draw(sf::RenderWindow& i_window);
     bool isInMap(); 
     

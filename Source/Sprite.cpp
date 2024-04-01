@@ -52,17 +52,19 @@ bool Sprite::checkCollision(const std::shared_ptr<Sprite>& sprite)
     }
 }
 
-void Sprite::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites)
-{
+bool Sprite::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites)
+{   
+    bool CollisionStatus = false;
     for(auto& sprite : vectorOfSprites)
     {
         if(checkCollision(sprite))
         {
             HP_--;
             sprite->setHP(sprite->getHP() - 1);
-            //std::cout << "Sprite collision!\n";
+            CollisionStatus = true;
         }
     }
+    return CollisionStatus;
 }
 
 void Sprite::draw(sf::RenderWindow& i_window)

@@ -9,8 +9,10 @@ Spaceship::Spaceship()
                   0.2f, //acceleration
                   3.f) //rotationalSpeed
 {
+    setHP(3);
+    previousInvulnerabilityTime_ = std::chrono::steady_clock::now();
     bulletManager_.reserve(bulletsQuantity_);
-    
+       
     rectangle_.setOrigin(size_.x/2, size_.y/2);
     rectangle_.setFillColor(sf::Color::Magenta);
     rectangle_.setSize(size_);
@@ -28,6 +30,36 @@ void Spaceship::checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vect
             points_++;
         }
     }
+}
+
+bool Spaceship::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites) 
+{   
+    auto HPbeforeCollision = getHP();
+    auto collisionStatus = false;
+    if(Sprite::checkSpritesCollision(vectorOfSprites) and invulnerability_ == false)
+    {
+        invulnerability_ = true;
+        previousInvulnerabilityTime_ = std::chrono::steady_clock::now();
+        collisionStatus = true;
+        this->rectangle_.setFillColor(sf::Color::Blue);
+    }
+    
+    else if(Sprite::checkSpritesCollision(vectorOfSprites) and invulnerability_ == true)
+    {
+        this-> HP_ = HPbeforeCollision;
+        collisionStatus = true;
+        this-> rectangle_.setFillColor(sf::Color::Blue);
+    }
+
+    invulnerabilityDT = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousInvulnerabilityTime_).count();
+        
+    if(invulnerabilityDT >= invulnerabilityTime_)
+    {
+        invulnerability_ = false;
+        this->rectangle_.setFillColor(sf::Color::Magenta);
+    }
+
+    return collisionStatus;
 }
 
 void Spaceship::draw(sf::RenderWindow& i_window)
@@ -69,9 +101,9 @@ void Spaceship::shoot()
         shootAbility_ = false;
     }
 
-    deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousShootTime_).count();
+    deltaTime_ = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousShootTime_).count();
     
-    if(deltaTime > shootUnabilityTime_)
+    if(deltaTime_ > shootUnabilityTime_)
     {
         shootAbility_ = true;
     }
