@@ -38,6 +38,13 @@ int main()
     POINTS_TEXT.setPosition(sf::Vector2f(0.0, 50.f));
     POINTS_TEXT.setCharacterSize(24);
     POINTS_TEXT.setStyle(sf::Text::Bold);
+    
+    sf::Text HP_TEXT;
+    HP_TEXT.setFont(font);
+    HP_TEXT.setFillColor(sf::Color::Red);
+    HP_TEXT.setCharacterSize(24);
+    HP_TEXT.setPosition(sf::Vector2f(0.0, 100.f));
+    HP_TEXT.setStyle(sf::Text::Bold);
 
     while(window.isOpen())
     {
@@ -54,7 +61,7 @@ int main()
             
         LVL_TEXT.setString("Level: " + std::to_string(LVL));
         POINTS_TEXT.setString("Points: " + std::to_string(spaceship.getPoints()));
-        
+        HP_TEXT.setString("HP: " + std::to_string(spaceship.getHP()));
         enemiesManager.organizeEnemies(LVL);
 
         spaceship.accelerate();
@@ -83,6 +90,7 @@ int main()
         enemiesManager.drawAll(window);
         window.draw(LVL_TEXT);
         window.draw(POINTS_TEXT);
+        window.draw(HP_TEXT);
         window.display();
         {
             using namespace std::chrono_literals;
