@@ -116,9 +116,14 @@ void Sprite::setPosition(sf::Vector2f const newPos)
     position_ = newPos;
 }
 
-void Sprite::setHP(size_t hp)
+void Sprite::setHP(size_t const hp)
 {
     HP_ = hp;
+}
+
+void Sprite::setSize(sf::Vector2f const size)
+{
+    size_ = size;
 }
 
 /*______________________OPERATORS_______________________*/

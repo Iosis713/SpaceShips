@@ -12,7 +12,7 @@ class Sprite
 protected:
     size_t HP_ = 1;
     sf::Vector2f position_{200.f, 300.f};
-    const sf::Vector2f size_{30.f, 30.f};
+    sf::Vector2f size_{30.f, 30.f};
     sf::RectangleShape rectangle_;
     
 public:
@@ -32,9 +32,10 @@ public:
     sf::RectangleShape getRectangle() const;
     sf::Vector2f getSize() const;
     
-    void setHP(size_t hp);   
+    void setHP(size_t const hp);   
     void setPosition(sf::Vector2f const newPos);
-    
+    void setSize(sf::Vector2f const size);
+
     Sprite& operator--();
 };
 

@@ -17,14 +17,12 @@ public:
     Controllable(sf::Vector2f position, float rotation, float maxSpeed, float speed, float acceleration, float rotationSpeed);
     Controllable(sf::Vector2f position, float rotation, sf::Vector2f size, float maxSpeed, float speed, float acceleration, float rotationSpeed);
 
-
-
-
-
     virtual ~Controllable() = default;
     
     void accelerate();
     void changeDirection();
+    void turnLeft();
+    void turnRight();
 
 /*______________________GETTERS__________________________*/
 

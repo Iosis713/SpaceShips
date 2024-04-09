@@ -77,12 +77,22 @@ void Controllable::changeDirection()
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        rectangle_.setRotation(rectangle_.getRotation() - rotationSpeed_);
+        turnLeft();
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        rectangle_.setRotation(rectangle_.getRotation() + rotationSpeed_);
+        turnRight();
     }
+}
+
+void Controllable::turnLeft()
+{
+    rectangle_.setRotation(rectangle_.getRotation() - rotationSpeed_);
+}
+
+void Controllable::turnRight()
+{
+    rectangle_.setRotation(rectangle_.getRotation() + rotationSpeed_);
 }
 
 /*________________________GETTERS________________________________*/

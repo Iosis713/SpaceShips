@@ -9,6 +9,7 @@
 #include "Source/Headers/Bullet.hpp"
 #include "Source/Headers/Spaceship.hpp"
 #include "Source/Headers/EnemiesManager.hpp"
+#include "Source/Headers/SelfSteering.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Window.hpp>
@@ -20,7 +21,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SpaceShips");
    
     Spaceship spaceship;
-    
+    SelfSteering autoRocket;
+
     EnemiesManager enemiesManager;
     
     sf::Font font;
@@ -63,6 +65,13 @@ int main()
         POINTS_TEXT.setString("Points: " + std::to_string(spaceship.getPoints()));
         HP_TEXT.setString("HP: " + std::to_string(spaceship.getHP()));
         enemiesManager.organizeEnemies(LVL);
+        
+        autoRocket.aimTarget(spaceship);
+        autoRocket.regulateDirection();
+        //autoRocket.turnRight();
+
+        //std::cout << "Rocket direction: " << autoRocket.getRotation() << '\n';
+        autoRocket.updatePosition();
 
         spaceship.accelerate();
         spaceship.changeDirection();
@@ -71,6 +80,7 @@ int main()
         spaceship.checkBulletsCollision(enemiesManager.getManager());
         LVL = (spaceship.getPoints() / 10) + 1;
         //sprites speed increased if level is higher
+        //std::cout << spaceship.getRotation() << '\n';
         spaceship.checkSpritesCollision(enemiesManager.getManager());
         if(!spaceship.isInMap())
         {
@@ -88,6 +98,8 @@ int main()
 
         spaceship.draw(window);       
         enemiesManager.drawAll(window);
+        autoRocket.draw(window);
+
         window.draw(LVL_TEXT);
         window.draw(POINTS_TEXT);
         window.draw(HP_TEXT);

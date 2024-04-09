@@ -16,7 +16,8 @@ set(SRC         Source/Sprite.cpp
                 Source/Controllable.cpp
                 Source/Bullet.cpp
                 Source/Spaceship.cpp
-                Source/EnemiesManager.cpp)
+                Source/EnemiesManager.cpp
+                Source/SelfSteering.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC  ${SRC})
 
