@@ -4,12 +4,16 @@
 
 #include "Moveable.hpp"
 #include "Bullet.hpp"
+#include "SelfSteering.hpp"
+#include "Spaceship.hpp"
 
 #include <chrono>
 #include <vector>
 #include <memory>
 #include <random>
 #include <thread>
+#include <typeinfo>
+#include <iostream>
 
 using Manager = std::vector<std::shared_ptr<Sprite>>;
 using Time = std::chrono::time_point<std::chrono::steady_clock>;
@@ -24,8 +28,9 @@ public:
     EnemiesManager();
     ~EnemiesManager() = default;
     void addMoveable(const size_t level);
+    void addSelfSteering();
     void drawAll(sf::RenderWindow& i_window);
-    void organizeEnemies(const size_t level);
+    void organizeEnemies(const size_t level, const Spaceship& target);
     void clearEnemies();
 
     Manager& getManager();

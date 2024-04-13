@@ -13,6 +13,12 @@ void EnemiesManager::addMoveable(const size_t level)
                                                 level * 3.f));
 }
 
+void EnemiesManager::addSelfSteering()
+{
+    manager_.push_back(std::make_shared<SelfSteering>(sf::Vector2f(static_cast<float>(getRandom()),
+                                                        static_cast<float>(SCREEN_HEIGHT) -1 )));
+}
+
 void EnemiesManager::drawAll(sf::RenderWindow& i_window)
 {
     for(auto& sprite : manager_)
@@ -21,19 +27,37 @@ void EnemiesManager::drawAll(sf::RenderWindow& i_window)
     }
 }
 
-void EnemiesManager::organizeEnemies(const size_t level)
+void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target)
 {
     deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousEnemyRelease).count();
     
     if(deltaTime > 200 and manager_.size() < maxEnemies)
     {
-        addMoveable(level);
+        if(level >= 2 and getRandom() % (100/level) == 0)
+        {
+            addSelfSteering();  
+        }
+        else
+        {
+            addMoveable(level);
+        }
         previousEnemyRelease = std::chrono::steady_clock::now();
     }   
+    
+    std::shared_ptr<SelfSteering> typeRef = std::make_shared<SelfSteering>();
 
     for(auto& sprite : manager_)
-    {
-        dynamic_pointer_cast<Moveable>(sprite)->updatePosition();
+    {   
+        if(typeid(*sprite) == typeid(*typeRef))
+        {
+            dynamic_pointer_cast<SelfSteering>(sprite)->aimTarget(target);
+            dynamic_pointer_cast<SelfSteering>(sprite)->regulateDirection();
+            dynamic_pointer_cast<SelfSteering>(sprite)->updatePosition();
+        }
+        else
+        {
+            dynamic_pointer_cast<Moveable>(sprite)->updatePosition();
+        }
     }
 }
 
