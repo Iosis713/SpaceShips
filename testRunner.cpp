@@ -1,5 +1,6 @@
 #include <iostream>
 #include <gtest/gtest.h>
+#include <tuple>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -9,6 +10,16 @@
 #include "Source/Headers/Controllable.hpp"
 #include "Source/Headers/Bullet.hpp"
 #include "Source/Headers/Spaceship.hpp"
+#include "Source/Headers/SelfSteering.hpp"
+
+
+class SelfSteeringFixture : public testing::TestWithParam<std::tuple<sf::Vector2f,float>>
+{
+public:
+    //by default it points 180 deg which means up direction
+    SelfSteering selfSteering{sf::Vector2f(500, 500)};
+protected:
+};
 
 TEST(BulletsTest, killingTest)
 {
@@ -57,6 +68,27 @@ TEST(SpriteCollision, negativeTest2)
     ASSERT_FALSE(sprite1->checkCollision(sprite2));
 }
 
+TEST_P(SelfSteeringFixture, regualteDirTest_turnLeft)
+{
+    std::tuple<sf::Vector2f, float> tuple = GetParam();
+    
+    Sprite sprite(std::get<0>(tuple));
+    selfSteering.aimTarget(sprite);
+    selfSteering.regulateDirection();
+    
+    float expectedValue = std::get<1>(tuple);
+
+    ASSERT_EQ(expectedValue, selfSteering.getRotation());
+}
+
+INSTANTIATE_TEST_CASE_P(RotationEQ, SelfSteeringFixture, testing::Values(
+    std::make_tuple(sf::Vector2f(600, 400), 185),
+    std::make_tuple(sf::Vector2f(600, 600), 185),
+    std::make_tuple(sf::Vector2f(501, 600), 185),
+    std::make_tuple(sf::Vector2f(499, 600), 175),
+    std::make_tuple(sf::Vector2f(300, 600), 175),
+    std::make_tuple(sf::Vector2f(300, 400), 175),
+    std::make_tuple(sf::Vector2f(500, 200), 180)));
 
 int main(int argc, char** argv)
 {
