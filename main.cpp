@@ -4,7 +4,6 @@
 #include <string>
 #include <typeinfo>
 
-
 #include "Source/Headers/Sprite.hpp"
 #include "Source/Headers/Moveable.hpp"
 #include "Source/Headers/Controllable.hpp"
@@ -28,7 +27,7 @@ int main()
     
     sf::Font font;
     font.loadFromFile("../Source/Arial.ttf");
-
+    //text display: level, points, hp
     sf::Text LVL_TEXT;
     LVL_TEXT.setFont(font);
     LVL_TEXT.setFillColor(sf::Color::Green);
@@ -48,7 +47,7 @@ int main()
     HP_TEXT.setCharacterSize(24);
     HP_TEXT.setPosition(sf::Vector2f(0.0, 100.f));
     HP_TEXT.setStyle(sf::Text::Bold);
-
+    
     while(window.isOpen())
     {
         sf::Event event;
@@ -61,10 +60,11 @@ int main()
                 window.close();
             }
         }
-            
+        //Level/Points/HP view    
         LVL_TEXT.setString("Level: " + std::to_string(LVL));
         POINTS_TEXT.setString("Points: " + std::to_string(spaceship.getPoints()));
         HP_TEXT.setString("HP: " + std::to_string(spaceship.getHP()));
+        
         enemiesManager.organizeEnemies(LVL, spaceship);
         
         spaceship.accelerate();
@@ -72,6 +72,7 @@ int main()
         spaceship.shoot();
         spaceship.updatePosition();
         spaceship.checkBulletsCollision(enemiesManager.getManager());
+        
         LVL = (spaceship.getPoints() / 10) + 1;
         //sprites speed increased if level is higher
        
@@ -87,6 +88,7 @@ int main()
             std::this_thread::sleep_for(5s);
             return 0;
         }
+
         spaceship.organizeBullets();
         enemiesManager.clearEnemies();
 
@@ -97,7 +99,8 @@ int main()
         window.draw(POINTS_TEXT);
         window.draw(HP_TEXT);
         window.display();
-        {
+        {   
+            //about 50 fps
             using namespace std::chrono_literals;
             std::this_thread::sleep_for(20ms);
         }

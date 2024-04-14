@@ -33,7 +33,7 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
     
     if(deltaTime > 200 and manager_.size() < maxEnemies)
     {
-        if(level >= 2 and getRandom() % (100/level) == 0)
+        if(level >= 2 and getRandom() % (100/(level*2)) == 0)
         {
             addSelfSteering();  
         }
@@ -43,16 +43,20 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
         }
         previousEnemyRelease = std::chrono::steady_clock::now();
     }   
-    
-    std::shared_ptr<SelfSteering> typeRef = std::make_shared<SelfSteering>();
 
     for(auto& sprite : manager_)
     {   
-        if(typeid(*sprite) == typeid(*typeRef))
+        //to check collision with other enemies
+        auto temporaryManager = manager_;
+        temporaryManager.erase(std::remove(temporaryManager.begin(), temporaryManager.end(), sprite), temporaryManager.end());
+
+        if(typeid(*sprite) == typeid(SelfSteering))
         {
             dynamic_pointer_cast<SelfSteering>(sprite)->aimTarget(target);
             dynamic_pointer_cast<SelfSteering>(sprite)->regulateDirection();
             dynamic_pointer_cast<SelfSteering>(sprite)->updatePosition();
+
+            sprite->checkSpritesCollision(temporaryManager);
         }
         else
         {
