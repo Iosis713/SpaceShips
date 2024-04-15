@@ -73,6 +73,19 @@ void Sprite::draw(sf::RenderWindow& i_window)
     i_window.draw(rectangle_);
 }
 
+void Sprite::drawImage(sf::RenderWindow& i_window)
+{
+    sf::Texture texture;
+    //texture.loadFromFile("~/Programming/SpaceShips/Source/Images/Rocket.png");
+    texture.loadFromFile("../Source/Images/Rocket.png");
+
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setTexture(texture);
+    sprite_.setPosition(position_);
+    
+    i_window.draw(sprite_);
+}
+
 bool Sprite::isInMap()
 {
     //checking if the center of the sprite is inside the map
@@ -104,6 +117,11 @@ sf::RectangleShape Sprite::getRectangle() const
     return this->rectangle_;
 }
 
+float Sprite::getRotation() const
+{
+    return this->sprite_.getRotation();
+}
+
 sf::Vector2f Sprite::getSize() const
 {
     return this->size_;
@@ -119,6 +137,11 @@ void Sprite::setPosition(sf::Vector2f const newPos)
 void Sprite::setHP(size_t const hp)
 {
     HP_ = hp;
+}
+
+void Sprite::setRotation(float const rotation)
+{
+    sprite_.setRotation(rotation);
 }
 
 void Sprite::setSize(sf::Vector2f const size)
