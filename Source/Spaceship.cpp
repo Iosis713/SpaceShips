@@ -3,7 +3,7 @@
 Spaceship::Spaceship()
     : Controllable(sf::Vector2f(static_cast<float>(SCREEN_WIDTH/2), static_cast<float>(SCREEN_HEIGHT/2)),
                   0.f, // rotation
-                  sf::Vector2f(20.f, 40.f), //size
+                  sf::Vector2f(40.f, 30.f), //size
                   16.f, //maxSpeed
                   0.f, //speed
                   0.2f, //acceleration
@@ -13,11 +13,9 @@ Spaceship::Spaceship()
     previousInvulnerabilityTime_ = std::chrono::steady_clock::now();
     bulletManager_.reserve(bulletsQuantity_);
        
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Magenta);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
-    rectangle_.setRotation(180.f);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
+    sprite_.setRotation(180.f);
 }
 
 void Spaceship::checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites)
@@ -41,14 +39,12 @@ bool Spaceship::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vect
         invulnerability_ = true;
         previousInvulnerabilityTime_ = std::chrono::steady_clock::now();
         collisionStatus = true;
-        this->rectangle_.setFillColor(sf::Color::Blue);
     }
     
     else if(Sprite::checkSpritesCollision(vectorOfSprites) and invulnerability_ == true)
     {
         this-> HP_ = HPbeforeCollision;
         collisionStatus = true;
-        this-> rectangle_.setFillColor(sf::Color::Blue);
     }
 
     invulnerabilityDT = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousInvulnerabilityTime_).count();
@@ -56,7 +52,6 @@ bool Spaceship::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vect
     if(invulnerabilityDT >= invulnerabilityTime_)
     {
         invulnerability_ = false;
-        this->rectangle_.setFillColor(sf::Color::Magenta);
     }
 
     return collisionStatus;
@@ -64,8 +59,13 @@ bool Spaceship::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vect
 
 void Spaceship::draw(sf::RenderWindow& i_window)
 {
-    rectangle_.setPosition(position_);
-    i_window.draw(rectangle_);
+    sf::Texture texture;
+    texture.loadFromFile("../Source/Images/Spaceship.png");
+
+    sprite_.setTexture(texture);
+    sprite_.setPosition(position_);
+
+    i_window.draw(sprite_);
 
     for(auto& bullet : bulletManager_)
     {

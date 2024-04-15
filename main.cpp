@@ -24,8 +24,6 @@ int main()
     Spaceship spaceship;
 
     EnemiesManager enemiesManager;
-    
-    Sprite sprite1(sf::Vector2f(600.f, 600.f));
 
     sf::Font font;
     font.loadFromFile("../Source/Arial.ttf");
@@ -68,10 +66,7 @@ int main()
         HP_TEXT.setString("HP: " + std::to_string(spaceship.getHP()));
         
         enemiesManager.organizeEnemies(LVL, spaceship);
-        
-        sprite1.setRotation(sprite1.getRotation() + 5.f);
-        sprite1.drawImage(window);
-
+ 
         spaceship.accelerate();
         spaceship.changeDirection();
         spaceship.shoot();

@@ -3,11 +3,9 @@
 SelfSteering::SelfSteering()
 {   
     setSize(sf::Vector2f(15.f, 30.f));
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Yellow);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
-    rectangle_.setRotation(180.f);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
+    sprite_.setRotation(180.f);
     speed_ = 10.f;
     rotationSpeed_ = 5.f;
 }
@@ -16,11 +14,9 @@ SelfSteering::SelfSteering(sf::Vector2f position)
     : Controllable(position)
 {   
     setSize(sf::Vector2f(15.f, 30.f));
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Yellow);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
-    rectangle_.setRotation(180.f);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
+    sprite_.setRotation(180.f);
     speed_ = 10.f;
     rotationSpeed_ = 5.f;
 }
@@ -74,7 +70,7 @@ void SelfSteering::regulateDirection()
         rotationDifference = getRotation() - targetDirection_;
         if(rotationDifference < rotationSpeed_)
         {
-            rectangle_.setRotation(targetDirection_);
+            sprite_.setRotation(targetDirection_);
         }
         else
         {
@@ -88,7 +84,7 @@ void SelfSteering::regulateDirection()
         rotationDifference = getRotation() - targetDirection_ - 180.f;
         if(rotationDifference < rotationSpeed_)
         {
-            rectangle_.setRotation(targetDirection_);
+            sprite_.setRotation(targetDirection_);
         }
         else
         {
@@ -103,7 +99,7 @@ void SelfSteering::regulateDirection()
         rotationDifference = targetDirection_ - getRotation();
         if(rotationDifference < rotationSpeed_)
         {
-            rectangle_.setRotation(targetDirection_);
+            sprite_.setRotation(targetDirection_);
         }
         else
         {
@@ -117,7 +113,7 @@ void SelfSteering::regulateDirection()
         rotationDifference = targetDirection_ - getRotation();
         if(rotationDifference < rotationSpeed_)
         {
-            rectangle_.setRotation(targetDirection_);
+            sprite_.setRotation(targetDirection_);
         }
         else
         {

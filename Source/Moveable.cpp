@@ -5,11 +5,9 @@ Moveable::Moveable(sf::Vector2f position, float rotation, sf::Vector2f size, flo
     , maxSpeed_(maxSpeed)
     , speed_(speed)
 {
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Red);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
-    rectangle_.setRotation(rotation);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
+    sprite_.setRotation(rotation);    
 }
 
 Moveable::Moveable(sf::Vector2f position, float rotation, float maxSpeed, float speed)
@@ -17,43 +15,35 @@ Moveable::Moveable(sf::Vector2f position, float rotation, float maxSpeed, float 
     , maxSpeed_(maxSpeed)
     , speed_(speed)
 {
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Red);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
-    rectangle_.setRotation(rotation);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
+    sprite_.setRotation(rotation);   
 }
 
 Moveable::Moveable(sf::Vector2f position, float rotation)
     : Sprite(position)
 {
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Red);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
-    rectangle_.setRotation(rotation);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
+    sprite_.setRotation(rotation);
 }   
 
 Moveable::Moveable()
 {
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Red);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
 }
 
 Moveable::Moveable(sf::Vector2f position)
     : Sprite(position)
 {
-    rectangle_.setOrigin(size_.x/2, size_.y/2);
-    rectangle_.setFillColor(sf::Color::Red);
-    rectangle_.setSize(size_);
-    rectangle_.setPosition(position_);
+    sprite_.setOrigin(size_.x/2, size_.y/2);
+    sprite_.setPosition(position_);
 }
 
 void Moveable::updatePosition()
 {
-    float angle = rectangle_.getRotation() * M_PI / 180; // deg to radians
+    float angle = sprite_.getRotation() * M_PI / 180; // deg to radians
     using namespace std;
     {
     velocity_.x = round(-speed_ * sin(angle));
@@ -67,11 +57,6 @@ void Moveable::updatePosition()
 float Moveable::getSpeed() const
 {
     return this->speed_;
-}
-
-float Moveable::getRotation() const
-{
-    return this->rectangle_.getRotation();
 }
 
 /*____________________SETTERS_________________________________*/

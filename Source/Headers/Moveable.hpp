@@ -24,7 +24,6 @@ public:
     virtual void updatePosition();
 
     float getSpeed() const;
-    float getRotation() const;
 
     void setSpeed(float newSpeed);
 
