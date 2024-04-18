@@ -12,8 +12,9 @@ protected:
 public:
     Bullet(sf::Vector2f position, float rotation);
     Bullet(sf::Vector2f position, float rotation, sf::Vector2f size, float maxSpeed, float speed);
-
+    
     virtual ~Bullet() = default;
+    void draw(sf::RenderWindow& i_window) override;
 };
 
 #endif

@@ -21,6 +21,7 @@ public:
     
     void aimTarget(const Sprite& sprite);
     void aimTarget(const std::shared_ptr<Sprite>& sprite_ptr);
+    void draw(sf::RenderWindow& i_window) override;
     void regulateDirection();
 
     int getRandom();

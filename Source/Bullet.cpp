@@ -17,3 +17,14 @@ Bullet::Bullet(sf::Vector2f position, float rotation)
     sprite_.setRotation(rotation);
 }
 
+void Bullet::draw(sf::RenderWindow& i_window)
+{
+    sf::Texture texture;
+    texture.loadFromFile("../Source/Images/Bullet.png");
+
+    sprite_.setTexture(texture);
+    sprite_.setPosition(position_);
+
+    i_window.draw(sprite_);
+}
+
