@@ -14,7 +14,8 @@ protected:
     sf::Vector2f position_{200.f, 300.f};
     sf::Vector2f size_{30.f, 30.f};
     sf::Sprite sprite_;
-    
+    sf::Vector2f velocity_{0.f, 0.f};
+
 public:
     Sprite();
     Sprite(sf::Vector2f position);
@@ -33,6 +34,7 @@ public:
     float getRotation() const;
     sf::Vector2f getSize() const;
     sf::Sprite getSprite() const;
+    sf::Vector2f getVelocity() const;
 
     void setHP(int const hp);   
     void setPosition(sf::Vector2f const newPos);

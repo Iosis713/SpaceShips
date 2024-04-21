@@ -111,6 +111,11 @@ sf::Sprite Sprite::getSprite() const
     return this->sprite_;
 }
 
+sf::Vector2f Sprite::getVelocity() const
+{
+    return this->velocity_;
+}
+
 /*__________________SETTERS___________________________*/
 
 void Sprite::setPosition(sf::Vector2f const newPos)

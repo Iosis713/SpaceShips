@@ -16,7 +16,7 @@ class SelfSteering : public Controllable
 protected:
     sf::Vector2f targetPosition_{0.0, 0.0};
     float targetDirection_ = 180.f;
-    float warningDistance_ = 60.f;
+    float warningDistance_ = 200.f;
 public:
     SelfSteering();
     SelfSteering(sf::Vector2f position);

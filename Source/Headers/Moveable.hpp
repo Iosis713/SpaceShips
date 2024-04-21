@@ -10,8 +10,7 @@ class Moveable : public Sprite
 protected:  
     float maxSpeed_ = 6.f;
     float speed_ = 0.f;
-    sf::Vector2f velocity_{0.f, 0.f};
-    
+        
 public:
     Moveable();
     Moveable(sf::Vector2f position);

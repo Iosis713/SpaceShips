@@ -6,11 +6,16 @@ EnemiesManager::EnemiesManager()
 }
 
 void EnemiesManager::addMoveable(const size_t level)
-{
+{   
+    auto direction = static_cast<float>(getRandom() % 180) - 90.f;
+    if(direction < 0)
+    {
+        direction = 360 + direction;
+    }
     manager_.push_back(std::make_shared<Moveable>(sf::Vector2f(static_cast<float>(getRandom()), -20),
-                                                static_cast<float>(getRandom() % 180),
-                                                level * 3.f,
-                                                level * 3.f));
+                                                direction,
+                                                level * 1.f,
+                                                level * 1.f));
 }
 
 void EnemiesManager::addSelfSteering()
@@ -31,7 +36,7 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
 {
     deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousEnemyRelease).count();
     
-    if(deltaTime > 200 and manager_.size() < maxEnemies)
+    if(deltaTime > 100 and manager_.size() < maxEnemies)
     {
         if(level >= 2 and getRandom() % (100/(level*2)) == 0)
         {
@@ -56,8 +61,11 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
             dynamic_pointer_cast<SelfSteering>(sprite)->regulateDirection();
             dynamic_pointer_cast<SelfSteering>(sprite)->updatePosition();
             
+            /*
             //WithoutCollisionTest
             dynamic_pointer_cast<SelfSteering>(sprite)->aimWithoutCollision(target, temporaryManager);
+            dynamic_pointer_cast<SelfSteering>(sprite)->updatePosition();
+            */
 
             sprite->checkSpritesCollision(temporaryManager);
         }

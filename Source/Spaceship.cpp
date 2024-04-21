@@ -4,12 +4,12 @@ Spaceship::Spaceship()
     : Controllable(sf::Vector2f(static_cast<float>(SCREEN_WIDTH/2), static_cast<float>(SCREEN_HEIGHT/2)),
                   0.f, // rotation
                   sf::Vector2f(40.f, 30.f), //size
-                  16.f, //maxSpeed
+                  8.f, //maxSpeed
                   0.f, //speed
                   0.2f, //acceleration
                   3.f) //rotationalSpeed
 {
-    setHP(5000);
+    setHP(5);
     previousInvulnerabilityTime_ = std::chrono::steady_clock::now();
     bulletManager_.reserve(bulletsQuantity_);
        

@@ -6,8 +6,8 @@ SelfSteering::SelfSteering()
     sprite_.setOrigin(size_.x/2, size_.y/2);
     sprite_.setPosition(position_);
     sprite_.setRotation(180.f);
-    speed_ = 10.f;
-    rotationSpeed_ = 5.f;
+    speed_ = 8.f;
+    rotationSpeed_ = 4.f;
 }
 
 SelfSteering::SelfSteering(sf::Vector2f position)
@@ -17,25 +17,76 @@ SelfSteering::SelfSteering(sf::Vector2f position)
     sprite_.setOrigin(size_.x/2, size_.y/2);
     sprite_.setPosition(position_);
     sprite_.setRotation(180.f);
-    speed_ = 10.f;
+    speed_ = 7.f;
     rotationSpeed_ = 5.f;
 }
 
 void SelfSteering::aimWithoutCollision(const Sprite& target, const std::vector<std::shared_ptr<Sprite>> obstacles)
-{
+{   
+    aimTarget(target);
+    regulateDirection();
+
     targetPosition_ = target.getPosition();
     targetDirection_ = atan((position_.x - targetPosition_.x) 
                              / (targetPosition_.y - position_.y)) * (180.f / M_PI);
 
     for(auto& obstacle : obstacles)
     {
-        float distance = pow(
-                         pow((obstacle->getPosition().x - position_.x),2) + 
-                         pow((obstacle->getPosition().y - position_.y),2),0.5);
+        auto distance = pow(
+                        pow((obstacle->getPosition().x - position_.x),2) + 
+                        pow((obstacle->getPosition().y - position_.y),2),0.5);
 
         if(distance < warningDistance_)
         {
             std::cout << "Warning!!!\n";
+            auto predictedDistance = pow(
+                        pow((obstacle->getPosition().x + obstacle->getVelocity().x
+                        - position_.x - velocity_.x),2) + 
+                        pow((obstacle->getPosition().y + obstacle->getVelocity().x
+                        - position_.y - velocity_.y),2)
+                                    ,0.5);
+            /*
+            std::cout << "distance: " << distance << '\n';
+            std::cout << "Predicted distance: " << predictedDistance << '\n';
+            */
+
+            if(predictedDistance < distance)
+            {   
+                //predicting turning left
+                auto predictedDirection = (sprite_.getRotation() - rotationSpeed_) * M_PI / 180.f;
+                auto predictedVelocity = velocity_;
+                predictedVelocity.x = round(-speed_ * sin(predictedDirection));
+                predictedVelocity.y = round(speed_ * cos(predictedDirection));
+
+                auto predictedLeft = pow(
+                        pow((obstacle->getPosition().x + obstacle->getVelocity().x
+                        - position_.x - predictedVelocity.x),2) + 
+                        pow((obstacle->getPosition().y + obstacle->getVelocity().x
+                        - position_.y - predictedVelocity.y),2)
+                                    ,0.5);
+
+                //predicting turning right
+                predictedDirection = (sprite_.getRotation() + rotationSpeed_) * M_PI / 180.f;
+                predictedVelocity.x = round(-speed_ * sin(predictedDirection));
+                predictedVelocity.y = round(speed_ * cos(predictedDirection));
+
+                auto predictedRight = pow(
+                        pow((obstacle->getPosition().x + obstacle->getVelocity().x
+                        - position_.x - predictedVelocity.x),2) + 
+                        pow((obstacle->getPosition().y + obstacle->getVelocity().x
+                        - position_.y - predictedVelocity.y),2)
+                                    ,0.5);
+                
+                if(predictedLeft < predictedRight)
+                {
+                    turnRight();
+                }
+                else
+                {
+                    turnLeft();
+                }
+                std::cout << "Collision probable!!!!!!\n";
+            }
         }
     }
 
