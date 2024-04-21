@@ -55,6 +55,9 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
             dynamic_pointer_cast<SelfSteering>(sprite)->aimTarget(target);
             dynamic_pointer_cast<SelfSteering>(sprite)->regulateDirection();
             dynamic_pointer_cast<SelfSteering>(sprite)->updatePosition();
+            
+            //WithoutCollisionTest
+            dynamic_pointer_cast<SelfSteering>(sprite)->aimWithoutCollision(target, temporaryManager);
 
             sprite->checkSpritesCollision(temporaryManager);
         }

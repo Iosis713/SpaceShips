@@ -10,7 +10,7 @@
 class Sprite
 {
 protected:
-    size_t HP_ = 1;
+    int HP_ = 1;
     sf::Vector2f position_{200.f, 300.f};
     sf::Vector2f size_{30.f, 30.f};
     sf::Sprite sprite_;
@@ -28,13 +28,13 @@ public:
 
     bool isInMap(); 
     
-    size_t getHP() const;
+    int getHP() const;
     sf::Vector2f getPosition() const;
     float getRotation() const;
     sf::Vector2f getSize() const;
     sf::Sprite getSprite() const;
 
-    void setHP(size_t const hp);   
+    void setHP(int const hp);   
     void setPosition(sf::Vector2f const newPos);
     void setSize(sf::Vector2f const size);
     void setRotation(float const rotation);

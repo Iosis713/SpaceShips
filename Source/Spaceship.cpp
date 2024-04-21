@@ -9,7 +9,7 @@ Spaceship::Spaceship()
                   0.2f, //acceleration
                   3.f) //rotationalSpeed
 {
-    setHP(5);
+    setHP(5000);
     previousInvulnerabilityTime_ = std::chrono::steady_clock::now();
     bulletManager_.reserve(bulletsQuantity_);
        

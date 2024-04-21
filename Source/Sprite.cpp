@@ -86,7 +86,7 @@ bool Sprite::isInMap()
 
 /*____________________GETTERS___________________________*/
 
-size_t Sprite::getHP() const
+int Sprite::getHP() const
 {
     return this->HP_;
 }
@@ -118,7 +118,7 @@ void Sprite::setPosition(sf::Vector2f const newPos)
     position_ = newPos;
 }
 
-void Sprite::setHP(size_t const hp)
+void Sprite::setHP(int const hp)
 {
     HP_ = hp;
 }

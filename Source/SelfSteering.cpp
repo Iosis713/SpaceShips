@@ -21,6 +21,26 @@ SelfSteering::SelfSteering(sf::Vector2f position)
     rotationSpeed_ = 5.f;
 }
 
+void SelfSteering::aimWithoutCollision(const Sprite& target, const std::vector<std::shared_ptr<Sprite>> obstacles)
+{
+    targetPosition_ = target.getPosition();
+    targetDirection_ = atan((position_.x - targetPosition_.x) 
+                             / (targetPosition_.y - position_.y)) * (180.f / M_PI);
+
+    for(auto& obstacle : obstacles)
+    {
+        float distance = pow(
+                         pow((obstacle->getPosition().x - position_.x),2) + 
+                         pow((obstacle->getPosition().y - position_.y),2),0.5);
+
+        if(distance < warningDistance_)
+        {
+            std::cout << "Warning!!!\n";
+        }
+    }
+
+}
+
 void SelfSteering::aimTarget(const Sprite& sprite)
 {
     targetPosition_ = sprite.getPosition();
