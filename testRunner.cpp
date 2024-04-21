@@ -1,6 +1,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <tuple>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -36,9 +37,15 @@ TEST(BulletsTest, killingTest)
 }
 
 TEST(SpriteCollision, positiveTest1)
-{
+{   
     std::shared_ptr<Sprite> sprite1 = std::make_shared<Sprite>(sf::Vector2f(200, 200));
-    std::shared_ptr<Sprite> sprite2 = std::make_shared<Sprite>(sf::Vector2f(215, 220));
+    std::shared_ptr<Sprite> sprite2 = std::make_shared<Sprite>(sf::Vector2f(215, 210));
+    
+    //Window required for proper collision checking
+    //worked without it with rectangleShape, but not with sprites
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "TEST");
+    sprite1->draw(window);
+    sprite2->draw(window);
 
     ASSERT_TRUE(sprite1->checkCollision(sprite2));
 }
@@ -47,6 +54,10 @@ TEST(SpriteCollision, positiveTest2)
 {
     std::shared_ptr<Sprite> sprite1 = std::make_shared<Sprite>(sf::Vector2f(200, 200));
     std::shared_ptr<Sprite> sprite2 = std::make_shared<Sprite>(sf::Vector2f(229, 229));
+    
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "TEST");
+    sprite1->draw(window);
+    sprite2->draw(window);
 
     ASSERT_TRUE(sprite1->checkCollision(sprite2));
 }
@@ -54,7 +65,11 @@ TEST(SpriteCollision, positiveTest2)
 TEST(SpriteCollision, negativeTest1)
 {
     std::shared_ptr<Sprite> sprite1 = std::make_shared<Sprite>(sf::Vector2f(200, 200));
-    std::shared_ptr<Sprite> sprite2 = std::make_shared<Sprite>(sf::Vector2f(235, 220));
+    std::shared_ptr<Sprite> sprite2 = std::make_shared<Sprite>(sf::Vector2f(235, 229));
+
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "TEST");
+    sprite1->draw(window);
+    sprite2->draw(window);
 
     ASSERT_FALSE(sprite1->checkCollision(sprite2));
 }
@@ -64,6 +79,10 @@ TEST(SpriteCollision, negativeTest2)
 {
     std::shared_ptr<Sprite> sprite1 = std::make_shared<Sprite>(sf::Vector2f(170, 170));
     std::shared_ptr<Sprite> sprite2 = std::make_shared<Sprite>(sf::Vector2f(200, 200));
+
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "TEST");
+    sprite1->draw(window);
+    sprite2->draw(window);
 
     ASSERT_FALSE(sprite1->checkCollision(sprite2));
 }

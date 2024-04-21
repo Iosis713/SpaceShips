@@ -1,3 +1,5 @@
+#include <typeinfo>
+
 #include "Headers/Sprite.hpp"
 
 Sprite::Sprite(sf::Vector2f position, float rotation, sf::Vector2f size)
@@ -31,24 +33,22 @@ Sprite::Sprite(sf::Vector2f position)
 }
 
 bool Sprite::checkCollision(const std::shared_ptr<Sprite>& sprite)
-{
+{   
+    bool status = false;
     if(sprite_.getGlobalBounds().intersects(
             sprite->getSprite().getGlobalBounds()
                 ))
     {
-        return true;
+        status = true;
     }
-    else
-    {
-        return false;
-    }
+    return status;
 }
 
 bool Sprite::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorOfSprites)
 {   
     bool CollisionStatus = false;
     for(auto& sprite : vectorOfSprites)
-    {
+    {   
         if(checkCollision(sprite))
         {
             HP_--;
@@ -62,7 +62,6 @@ bool Sprite::checkSpritesCollision(std::vector<std::shared_ptr<Sprite>>& vectorO
 void Sprite::draw(sf::RenderWindow& i_window)
 {
     sf::Texture texture;
-    //texture.loadFromFile("~/Programming/SpaceShips/Source/Images/Rocket.png");
     texture.loadFromFile("../Source/Images/Sprite.png");
 
     sprite_.setTexture(texture);
@@ -148,4 +147,5 @@ std::shared_ptr<Sprite>& Sprite::operator--()
     return *this;
 }
 */
+
 

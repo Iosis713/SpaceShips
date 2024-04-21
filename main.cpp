@@ -20,7 +20,7 @@ size_t LVL = 1;
 int main()
 {   
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SpaceShips");
-   
+    
     Spaceship spaceship;
 
     EnemiesManager enemiesManager;
@@ -66,7 +66,7 @@ int main()
         HP_TEXT.setString("HP: " + std::to_string(spaceship.getHP()));
         
         enemiesManager.organizeEnemies(LVL, spaceship);
- 
+
         spaceship.accelerate();
         spaceship.changeDirection();
         spaceship.shoot();
@@ -88,7 +88,7 @@ int main()
             std::this_thread::sleep_for(5s);
             return 0;
         }
-
+        
         spaceship.organizeBullets();
         enemiesManager.clearEnemies();
 

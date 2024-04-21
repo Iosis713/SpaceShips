@@ -1,6 +1,5 @@
 #include "Headers/Bullet.hpp"
 
-
 Bullet::Bullet(sf::Vector2f position, float rotation, sf::Vector2f size, float maxSpeed, float speed)
     : Moveable(position, rotation, size, maxSpeed, speed)
 {
