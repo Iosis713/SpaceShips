@@ -9,6 +9,7 @@
 #include <thread>
 #include <memory>
 #include <vector>
+#include <random>
 
 class Spaceship : public Controllable
 {
@@ -19,6 +20,7 @@ protected:
     const unsigned invulnerabilityTime_ = 1500; //ms
     unsigned invulnerabilityDT = 0; //ms
     bool invulnerability_ = false;
+    size_t maxBulletsQuantity_ = 20;
     bool shootAbility_ = true;
     std::chrono::time_point<std::chrono::steady_clock> previousShootTime_;
     std::chrono::time_point<std::chrono::steady_clock> previousInvulnerabilityTime_;
@@ -35,9 +37,11 @@ public:
     void organizeBullets();
     void shoot();
     void updatePosition() override;
-
+    
+    size_t getBullets() const;
     std::vector<std::shared_ptr<Bullet>>& getBulletManager();
     size_t getPoints() const;
+    int getRandom();
         
 };
 

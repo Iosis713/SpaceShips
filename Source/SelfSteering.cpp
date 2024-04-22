@@ -6,8 +6,8 @@ SelfSteering::SelfSteering()
     sprite_.setOrigin(size_.x/2, size_.y/2);
     sprite_.setPosition(position_);
     sprite_.setRotation(180.f);
-    speed_ = 8.f;
-    rotationSpeed_ = 4.f;
+    speed_ = 10.f;
+    rotationSpeed_ = 5.f;
 }
 
 SelfSteering::SelfSteering(sf::Vector2f position)
@@ -17,7 +17,7 @@ SelfSteering::SelfSteering(sf::Vector2f position)
     sprite_.setOrigin(size_.x/2, size_.y/2);
     sprite_.setPosition(position_);
     sprite_.setRotation(180.f);
-    speed_ = 7.f;
+    speed_ = 10.f;
     rotationSpeed_ = 5.f;
 }
 

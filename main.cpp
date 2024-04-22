@@ -48,6 +48,13 @@ int main()
     HP_TEXT.setPosition(sf::Vector2f(0.0, 100.f));
     HP_TEXT.setStyle(sf::Text::Bold);
     
+    sf::Text BULLETS_TEXT;
+    BULLETS_TEXT.setFont(font);
+    BULLETS_TEXT.setFillColor(sf::Color::Magenta);
+    BULLETS_TEXT.setCharacterSize(24);
+    BULLETS_TEXT.setPosition(sf::Vector2f(0.0, 150.f));
+    BULLETS_TEXT.setStyle(sf::Text::Bold);
+
     while(window.isOpen())
     {
         sf::Event event;
@@ -60,11 +67,12 @@ int main()
                 window.close();
             }
         }
-        //Level/Points/HP view    
+        //Level/Points/HP/Bullets view    
         LVL_TEXT.setString("Level: " + std::to_string(LVL));
         POINTS_TEXT.setString("Points: " + std::to_string(spaceship.getPoints()));
         HP_TEXT.setString("HP: " + std::to_string(spaceship.getHP()));
-        
+        BULLETS_TEXT.setString("Bullets: " + std::to_string(spaceship.getBullets()));
+
         enemiesManager.organizeEnemies(LVL, spaceship);
 
         spaceship.accelerate();
@@ -98,6 +106,7 @@ int main()
         window.draw(LVL_TEXT);
         window.draw(POINTS_TEXT);
         window.draw(HP_TEXT);
+        window.draw(BULLETS_TEXT);
         window.display();
         {   
             //about 50 fps

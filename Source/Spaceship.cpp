@@ -24,8 +24,21 @@ void Spaceship::checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vect
     {
         bullet->checkSpritesCollision(vectorOfSprites);
         if(bullet->getHP() <= 0 and bullet->isInMap())
-        {
+        {   
             points_++;
+            if(bulletsQuantity_ < (maxBulletsQuantity_ - 1))
+            {
+                bulletsQuantity_ += 1;
+                if(getRandom() == 4)
+                {
+                    //5% chance
+                    bulletsQuantity_ += 1;
+                }
+            }
+            else if(bulletsQuantity_ == (maxBulletsQuantity_ - 1))
+            {
+                bulletsQuantity_ = maxBulletsQuantity_;
+            }
         }
     }
 }
@@ -89,15 +102,18 @@ void Spaceship::organizeBullets()
             });
 
     bulletManager_.erase(it, bulletManager_.end());
+    maxBulletsQuantity_ = 20 + (points_ / 10) * 10;
 }
 
 void Spaceship::shoot()
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and
-       shootAbility_)
+       shootAbility_ and
+       bulletsQuantity_ > 0)
     {
         bulletManager_.push_back(std::make_shared<Bullet>(position_, Spaceship::getRotation()));
         previousShootTime_ = std::chrono::steady_clock::now();
+        bulletsQuantity_--;
         shootAbility_ = false;
     }
 
@@ -124,6 +140,11 @@ void Spaceship::updatePosition()
     }
 }
 
+size_t Spaceship::getBullets() const
+{
+    return this->bulletsQuantity_;
+}
+
 std::vector<std::shared_ptr<Bullet>>& Spaceship::getBulletManager()
 {
     return this->bulletManager_;
@@ -132,5 +153,13 @@ std::vector<std::shared_ptr<Bullet>>& Spaceship::getBulletManager()
 size_t Spaceship::getPoints() const
 {
     return this->points_;
+}
+
+int Spaceship::getRandom()
+{
+    std::random_device randDev;
+    std::mt19937 randGenerator(randDev());
+    std::uniform_int_distribution<int> distribution(0, 4);
+    return distribution(randGenerator);
 }
 
