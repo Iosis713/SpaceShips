@@ -31,7 +31,7 @@ void Spaceship::checkBulletsCollision(std::vector<std::shared_ptr<Sprite>>& vect
                 bulletsQuantity_ += 1;
                 if(getRandom() == 4)
                 {
-                    //5% chance
+                    //20% chance for bonus bullet
                     bulletsQuantity_ += 1;
                 }
             }
@@ -124,6 +124,33 @@ void Spaceship::shoot()
         shootAbility_ = true;
     }
 
+}
+
+void Spaceship::shootBack()
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) and
+       shootAbility_ and
+       bulletsQuantity_ > 2)
+    {   
+        std::array<float, 3> rotation = {Spaceship::getRotation() - 180.f - 45.f,
+                                         Spaceship::getRotation() - 180.f,
+                                         Spaceship::getRotation() - 180.f + 45.f};
+
+        for(auto& value : rotation)
+        {   
+            std::cout << "Bullets: " << value << '\n';
+        }
+        previousShootTime_ = std::chrono::steady_clock::now();
+        bulletsQuantity_ -= 3;
+        shootAbility_ = false;
+    }
+    
+    deltaTime_ = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousShootTime_).count();
+
+    if(deltaTime_ > shootUnabilityTime_)
+    {
+        shootAbility_ = true;
+    }
 }
 
 void Spaceship::updatePosition()

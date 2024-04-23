@@ -78,9 +78,10 @@ int main()
         spaceship.accelerate();
         spaceship.changeDirection();
         spaceship.shoot();
+        spaceship.shootBack();
         spaceship.updatePosition();
         spaceship.checkBulletsCollision(enemiesManager.getManager());
-        
+
         LVL = (spaceship.getPoints() / 10) + 1;
         //sprites speed increased if level is higher
        

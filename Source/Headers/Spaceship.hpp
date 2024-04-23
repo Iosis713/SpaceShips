@@ -5,6 +5,7 @@
 #include "Controllable.hpp"
 #include "Bullet.hpp"
 
+#include <array>
 #include <chrono>
 #include <thread>
 #include <memory>
@@ -36,6 +37,7 @@ public:
     void draw(sf::RenderWindow& i_window) override;
     void organizeBullets();
     void shoot();
+    void shootBack();
     void updatePosition() override;
     
     size_t getBullets() const;
