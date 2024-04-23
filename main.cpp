@@ -55,7 +55,12 @@ int main()
     BULLETS_TEXT.setPosition(sf::Vector2f(0.0, 150.f));
     BULLETS_TEXT.setStyle(sf::Text::Bold);
 
-    while(window.isOpen())
+    sf::Sprite background;
+    sf::Texture backgroundTexture;
+    backgroundTexture.loadFromFile("../Source/Images/Background.png");
+    background.setTexture(backgroundTexture);
+
+    while(window.isOpen())  
     {
         sf::Event event;
         
@@ -72,7 +77,7 @@ int main()
         POINTS_TEXT.setString("Points: " + std::to_string(spaceship.getPoints()));
         HP_TEXT.setString("HP: " + std::to_string(spaceship.getHP()));
         BULLETS_TEXT.setString("Bullets: " + std::to_string(spaceship.getBullets()));
-
+        
         enemiesManager.organizeEnemies(LVL, spaceship);
 
         spaceship.accelerate();
@@ -101,9 +106,14 @@ int main()
         spaceship.organizeBullets();
         enemiesManager.clearEnemies();
 
+        //sf::RectangleShape gui_background(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+        //gui_background.setFillColor(sf::Color(0, 0, 0));
+
+
+        window.clear();
+        window.draw(background);
         spaceship.draw(window);       
         enemiesManager.drawAll(window);
-
         window.draw(LVL_TEXT);
         window.draw(POINTS_TEXT);
         window.draw(HP_TEXT);
@@ -114,7 +124,6 @@ int main()
             using namespace std::chrono_literals;
             std::this_thread::sleep_for(20ms);
         }
-        window.clear();
     }
 
     return 0;

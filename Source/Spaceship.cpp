@@ -138,7 +138,7 @@ void Spaceship::shootBack()
 
         for(auto& value : rotation)
         {   
-            std::cout << "Bullets: " << value << '\n';
+            bulletManager_.push_back(std::make_shared<Bullet>(position_, value));
         }
         previousShootTime_ = std::chrono::steady_clock::now();
         bulletsQuantity_ -= 3;
