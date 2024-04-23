@@ -106,10 +106,6 @@ int main()
         spaceship.organizeBullets();
         enemiesManager.clearEnemies();
 
-        //sf::RectangleShape gui_background(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
-        //gui_background.setFillColor(sf::Color(0, 0, 0));
-
-
         window.clear();
         window.draw(background);
         spaceship.draw(window);       
