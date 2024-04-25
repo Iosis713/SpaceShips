@@ -15,6 +15,7 @@ protected:
     sf::Vector2f size_{30.f, 30.f};
     sf::Sprite sprite_;
     sf::Vector2f velocity_{0.f, 0.f};
+    size_t counter_ = 0;
 
 public:
     Sprite();
@@ -29,13 +30,15 @@ public:
 
     bool isInMap(); 
     
+    size_t getCounter() const;
     int getHP() const;
     sf::Vector2f getPosition() const;
     float getRotation() const;
     sf::Vector2f getSize() const;
     sf::Sprite getSprite() const;
     sf::Vector2f getVelocity() const;
-
+    
+    void increaseCounter();
     void setHP(int const hp);   
     void setPosition(sf::Vector2f const newPos);
     void setSize(sf::Vector2f const size);

@@ -29,6 +29,17 @@ void EnemiesManager::drawAll(sf::RenderWindow& i_window)
     for(auto& sprite : manager_)
     {
         sprite->draw(i_window);
+        if(sprite->getHP() <= 0 and sprite->getCounter() <= 4)
+        {   
+            sf::Sprite boom;
+            sf::Texture texture;
+            texture.loadFromFile("../Source/Images/Boom.png");
+            boom.setPosition(sf::Vector2f(sprite->getPosition().x - 15, sprite->getPosition().y - 15));
+            boom.setTexture(texture);
+            boom.setTextureRect(sf::IntRect(30 * sprite->getCounter(), 0, 30, 30));
+            i_window.draw(boom);            
+            sprite->increaseCounter();
+        }
     }
 }
 
@@ -83,7 +94,7 @@ void EnemiesManager::clearEnemies()
     }
     auto it = std::remove_if(manager_.begin(), manager_.end(), [&](const auto& sprite)
             {
-                return (sprite->getHP() <= 0);
+                return (sprite->getHP() <= 0 and sprite->getCounter() >= 4);
             });
     
    manager_.erase(it, manager_.end());

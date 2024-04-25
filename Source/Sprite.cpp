@@ -86,6 +86,11 @@ bool Sprite::isInMap()
 
 /*____________________GETTERS___________________________*/
 
+size_t Sprite::getCounter() const
+{
+    return this->counter_;
+}
+
 int Sprite::getHP() const
 {
     return this->HP_;
@@ -117,6 +122,11 @@ sf::Vector2f Sprite::getVelocity() const
 }
 
 /*__________________SETTERS___________________________*/
+
+void Sprite::increaseCounter()
+{
+    counter_++;
+}
 
 void Sprite::setPosition(sf::Vector2f const newPos)
 {
