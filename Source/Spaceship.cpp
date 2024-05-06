@@ -4,7 +4,7 @@ Spaceship::Spaceship()
     : Controllable(sf::Vector2f(static_cast<float>(SCREEN_WIDTH/2), static_cast<float>(SCREEN_HEIGHT/2)),
                   0.f, // rotation
                   sf::Vector2f(40.f, 30.f), //size
-                  8.f, //maxSpeed
+                  9.f, //maxSpeed
                   0.f, //speed
                   0.2f, //acceleration
                   3.f) //rotationalSpeed
@@ -79,6 +79,20 @@ void Spaceship::draw(sf::RenderWindow& i_window)
     sprite_.setPosition(position_);
 
     i_window.draw(sprite_);
+    
+    if(speed_ > 0)
+    {
+        sf::Sprite light;
+        sf::Texture engineTexture;
+        engineTexture.loadFromFile("../Source/Images/EngineLight.png");
+        light.setOrigin(7.5f, 26.f);
+        light.setTexture(engineTexture);
+        light.setRotation(getRotation());
+        //light.setPosition(sf::Vector2f(position_.x, position_.y - cos(getRotation() * M_PI / 180) * 15));
+        light.setPosition(sf::Vector2f(position_.x, position_.y));
+        light.setTextureRect(sf::IntRect(15 * std::floor(static_cast<int>(speed_)/3), 0, 15, 15));
+        i_window.draw(light);
+    }
 
     for(auto& bullet : bulletManager_)
     {

@@ -6,7 +6,7 @@ SelfSteering::SelfSteering()
     sprite_.setOrigin(size_.x/2, size_.y/2);
     sprite_.setPosition(position_);
     sprite_.setRotation(180.f);
-    speed_ = 10.f;
+    speed_ = 11.f;
     rotationSpeed_ = 5.f;
 }
 
@@ -17,7 +17,7 @@ SelfSteering::SelfSteering(sf::Vector2f position)
     sprite_.setOrigin(size_.x/2, size_.y/2);
     sprite_.setPosition(position_);
     sprite_.setRotation(180.f);
-    speed_ = 10.f;
+    speed_ = 11.f;
     rotationSpeed_ = 5.f;
 }
 
@@ -45,10 +45,6 @@ void SelfSteering::aimWithoutCollision(const Sprite& target, const std::vector<s
                         pow((obstacle->getPosition().y + obstacle->getVelocity().x
                         - position_.y - velocity_.y),2)
                                     ,0.5);
-            /*
-            std::cout << "distance: " << distance << '\n';
-            std::cout << "Predicted distance: " << predictedDistance << '\n';
-            */
 
             if(predictedDistance < distance)
             {   
