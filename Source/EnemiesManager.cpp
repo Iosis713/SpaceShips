@@ -24,6 +24,26 @@ void EnemiesManager::addSelfSteering()
                                                         static_cast<float>(SCREEN_HEIGHT) -1 )));
 }
 
+void EnemiesManager::clearEnemies()
+{
+    
+    for(auto& sprite : manager_)
+    {
+        if(sprite->getPosition().x < 0 or
+           sprite->getPosition().x > SCREEN_WIDTH or
+           sprite->getPosition().y > SCREEN_HEIGHT)
+        {
+            sprite->setHP(0);
+        }  
+    }
+    auto it = std::remove_if(manager_.begin(), manager_.end(), [&](const auto& sprite)
+            {
+                return (sprite->getHP() <= 0 and sprite->getCounter() >= 4);
+            });
+    
+   manager_.erase(it, manager_.end());
+}
+
 void EnemiesManager::drawAll(sf::RenderWindow& i_window)
 {
     for(auto& sprite : manager_)
@@ -62,7 +82,7 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
 
     for(auto& sprite : manager_)
     {   
-        //to check collision with other enemies
+        //temporary manager to check collision with other enemies
         auto temporaryManager = manager_;
         temporaryManager.erase(std::remove(temporaryManager.begin(), temporaryManager.end(), sprite), temporaryManager.end());
 
@@ -80,24 +100,9 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
     }
 }
 
-void EnemiesManager::clearEnemies()
+void EnemiesManager::reset()
 {
-    
-    for(auto& sprite : manager_)
-    {
-        if(sprite->getPosition().x < 0 or
-           sprite->getPosition().x > SCREEN_WIDTH or
-           sprite->getPosition().y > SCREEN_HEIGHT)
-        {
-            sprite->setHP(0);
-        }  
-    }
-    auto it = std::remove_if(manager_.begin(), manager_.end(), [&](const auto& sprite)
-            {
-                return (sprite->getHP() <= 0 and sprite->getCounter() >= 4);
-            });
-    
-   manager_.erase(it, manager_.end());
+    manager_.erase(manager_.begin(), manager_.end());
 }
 
 int EnemiesManager::getRandom()

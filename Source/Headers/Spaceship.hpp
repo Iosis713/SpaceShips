@@ -44,7 +44,8 @@ public:
     std::vector<std::shared_ptr<Bullet>>& getBulletManager();
     size_t getPoints() const;
     int getRandom();
-        
+    
+    void reset();
 };
 
 #endif

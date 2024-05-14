@@ -40,6 +40,8 @@ public:
 
     bool getOptionConfirmed();
     Selected getSelected();
+
+    void setOptionConfirmed(bool newStatus);
 };
 #endif
 

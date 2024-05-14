@@ -119,6 +119,16 @@ void Spaceship::organizeBullets()
     maxBulletsQuantity_ = 20 + (points_ / 10) * 10;
 }
 
+void Spaceship::reset()
+{
+    HP_ = 5;
+    position_ = sf::Vector2f(static_cast<float>(SCREEN_WIDTH/2), static_cast<float>(SCREEN_HEIGHT/2));
+    bulletsQuantity_ = 20;
+    points_ = 0;
+    speed_ = 0.f;
+    sprite_.setRotation(180.f);
+}
+
 void Spaceship::shoot()
 {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and

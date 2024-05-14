@@ -63,44 +63,11 @@ int main()
     backgroundTexture.loadFromFile("../Source/Images/Background.png");
     background.setTexture(backgroundTexture);
         
-    //Button testButton(sf::Vector2f(400.f, 400.f), "TestButton");
     Menu menu;
-
-    //buttonClass manual test
-    while(window.isOpen())
-    {   
-        sf::Event event;
-        while(window.pollEvent(event))
-        {
-            if(event.type == sf::Event::Closed)
-            {
-                window.close();
-            }
-        }
-        
-        window.clear();
-        menu.drawButtons(window);
-        menu.changeSelected();
-        menu.organizeButtons();
-        window.display();
-        menu.confirmOption();
-        if(menu.getOptionConfirmed() and
-           static_cast<int>(menu.getSelected()) == 0)
-        {
-            break;
-        }
-        else if(menu.getOptionConfirmed() and
-                static_cast<int>(menu.getSelected()) == 1)
-        {
-            window.close();
-        }
-    }
-
 
     while(window.isOpen())  
     {
         sf::Event event;
-        
         while(window.pollEvent(event))
         {
             if(event.type == sf::Event::Closed)
@@ -108,6 +75,31 @@ int main()
                 window.close();
             }
         }
+
+/*__________________________   MENU   ______________________________________________*/
+    
+        while(!menu.getOptionConfirmed())
+        {   
+            window.clear();
+            menu.drawButtons(window);
+            menu.changeSelected();
+            menu.organizeButtons();
+            window.display();
+            menu.confirmOption();
+            if(menu.getOptionConfirmed() and
+               static_cast<int>(menu.getSelected()) == 0)
+            {
+                break;
+            }
+            else if(menu.getOptionConfirmed() and
+                    static_cast<int>(menu.getSelected()) == 1)
+            {
+                window.close();
+            }
+        }
+        
+/*___________________________   MAIN GAME   _________________________________________*/
+
         //Level/Points/HP/Bullets view    
         LVL_TEXT.setString("Level: " + std::to_string(LVL));
         POINTS_TEXT.setString("Points: " + std::to_string(spaceship.getPoints()));
@@ -134,9 +126,23 @@ int main()
     
         if(spaceship.getHP() <= 0)
         {
+            //YOU LOST
+            sf::Text LOOSE_TEXT;
+            LOOSE_TEXT.setFont(font);
+            LOOSE_TEXT.setFillColor(sf::Color::Red);
+            LOOSE_TEXT.setCharacterSize(200);
+            LOOSE_TEXT.setPosition(sf::Vector2f(200, SCREEN_HEIGHT/2 - 100));
+            LOOSE_TEXT.setStyle(sf::Text::Bold);
+            LOOSE_TEXT.setString("YOU LOST!");
+            window.draw(LOOSE_TEXT);
+            window.display();
+            //wait 5 seconds
             using namespace std::chrono_literals;
             std::this_thread::sleep_for(5s);
-            return 0;
+            //and restart game to menu
+            menu.setOptionConfirmed(false);
+            spaceship.reset();
+            enemiesManager.reset();
         }
         
         spaceship.organizeBullets();
@@ -157,6 +163,5 @@ int main()
             std::this_thread::sleep_for(20ms);
         }
     }
-
     return 0;
 }

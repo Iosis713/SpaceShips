@@ -60,3 +60,10 @@ Menu::Selected Menu::getSelected()
 {
     return this->selected_;   
 }
+
+/*____________________________SETTERS___________________________________*/
+
+void Menu::setOptionConfirmed(bool newStatus)
+{
+    optionConfirmed_ = newStatus;
+}

@@ -29,9 +29,10 @@ public:
     ~EnemiesManager() = default;
     void addMoveable(const size_t level);
     void addSelfSteering();
+    void clearEnemies();
     void drawAll(sf::RenderWindow& i_window);
     void organizeEnemies(const size_t level, const Spaceship& target);
-    void clearEnemies();
+    void reset();
 
     Manager& getManager();
     int getRandom();
