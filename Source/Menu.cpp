@@ -7,7 +7,7 @@ Menu::Menu()
 
 void Menu::changeSelected()
 {   
-    deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousOptionChangeTime).count();
+    deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - previousOptionChangeTime_).count();
     if((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) or
        sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) and
        deltaTime > 200)
@@ -19,7 +19,15 @@ void Menu::changeSelected()
         {
             selected_ = Selected::PLAY;
         }
-        previousOptionChangeTime = std::chrono::steady_clock::now();
+        previousOptionChangeTime_ = std::chrono::steady_clock::now();
+    }
+}
+
+void Menu::confirmOption()
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+    {
+        optionConfirmed_ = true;
     }
 }
 
@@ -29,7 +37,6 @@ void Menu::drawButtons(sf::RenderWindow& i_window)
     {
         button.draw(i_window);
     }
-    //std::cout << static_cast<int>(selected_) << '\n';
 }
 
 void Menu::organizeButtons()
@@ -40,4 +47,16 @@ void Menu::organizeButtons()
     }
     //opposite set to false
     buttons_[((static_cast<int>(selected_) + 1) % 2)].setStatus(false);
+}
+
+/*______________________________GETTERS_________________________________*/
+
+bool Menu::getOptionConfirmed()
+{
+    return this->optionConfirmed_;
+}
+
+Menu::Selected Menu::getSelected()
+{
+    return this->selected_;   
 }

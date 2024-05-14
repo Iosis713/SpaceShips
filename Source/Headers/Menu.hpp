@@ -20,21 +20,26 @@ protected:
                                    Button(sf::Vector2f(400.f, 550.f), "EXIT")};
 
     unsigned int deltaTime = 0;
+    bool optionConfirmed_ = false;
+    Time previousOptionChangeTime_;
     enum class Selected
     {
         PLAY = 0,
         EXIT = 1
     };
     Selected selected_ = Selected::PLAY;
-    Time previousOptionChangeTime;
 
 public:
     Menu();
     ~Menu() = default;
     
     void changeSelected();
+    void confirmOption();
     void drawButtons(sf::RenderWindow& i_window);
     void organizeButtons();
+
+    bool getOptionConfirmed();
+    Selected getSelected();
 };
 #endif
 

@@ -69,11 +69,31 @@ int main()
     //buttonClass manual test
     while(window.isOpen())
     {   
+        sf::Event event;
+        while(window.pollEvent(event))
+        {
+            if(event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+        }
+        
         window.clear();
         menu.drawButtons(window);
         menu.changeSelected();
         menu.organizeButtons();
         window.display();
+        menu.confirmOption();
+        if(menu.getOptionConfirmed() and
+           static_cast<int>(menu.getSelected()) == 0)
+        {
+            break;
+        }
+        else if(menu.getOptionConfirmed() and
+                static_cast<int>(menu.getSelected()) == 1)
+        {
+            window.close();
+        }
     }
 
 
