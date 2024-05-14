@@ -155,12 +155,4 @@ Sprite& Sprite::operator--()
     HP_--;
     return *this;
 }
-/*
-std::shared_ptr<Sprite>& Sprite::operator--()
-{
-    HP_--;
-    return *this;
-}
-*/
-
 

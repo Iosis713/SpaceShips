@@ -11,6 +11,9 @@
 #include "Source/Headers/Spaceship.hpp"
 #include "Source/Headers/EnemiesManager.hpp"
 #include "Source/Headers/SelfSteering.hpp"
+#include "Source/Headers/Button.hpp"
+#include "Source/Headers/Menu.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Window.hpp>
@@ -59,12 +62,25 @@ int main()
     sf::Texture backgroundTexture;
     backgroundTexture.loadFromFile("../Source/Images/Background.png");
     background.setTexture(backgroundTexture);
+        
+    //Button testButton(sf::Vector2f(400.f, 400.f), "TestButton");
+    Menu menu;
+
+    //buttonClass manual test
+    while(window.isOpen())
+    {   
+        window.clear();
+        menu.drawButtons(window);
+        menu.changeSelected();
+        menu.organizeButtons();
+        window.display();
+    }
+
 
     while(window.isOpen())  
     {
         sf::Event event;
         
-        //close window
         while(window.pollEvent(event))
         {
             if(event.type == sf::Event::Closed)
