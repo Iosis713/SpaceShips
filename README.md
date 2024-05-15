@@ -9,4 +9,4 @@ I decided to write simply Indie game, as beeing able to track a progess is most 
 
 * Since LVL 2 self steering arrows will aim you. You can trick them between asteroids or shoot them.
 
-![](https://github.com/Iosis713/SpaceShips/commit/0cedb001cd3928e2bc6045d21ed0f16f9bfa1242)
+![](https://github.com/Iosis713/SpaceShips/blob/master/spaceshipLonger.gif)
