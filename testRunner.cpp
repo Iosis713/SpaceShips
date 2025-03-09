@@ -100,7 +100,7 @@ TEST_P(SelfSteeringFixture, regualteDirTest_turnLeft)
     ASSERT_EQ(expectedValue, selfSteering.getRotation());
 }
 
-INSTANTIATE_TEST_CASE_P(RotationEQ, SelfSteeringFixture, testing::Values(
+INSTANTIATE_TEST_SUITE_P(RotationEQ, SelfSteeringFixture, testing::Values(
     std::make_tuple(sf::Vector2f(600, 400), 185),
     std::make_tuple(sf::Vector2f(600, 600), 185),
     std::make_tuple(sf::Vector2f(501, 600), 185),

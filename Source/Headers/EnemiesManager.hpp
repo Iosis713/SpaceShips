@@ -12,7 +12,6 @@
 #include <memory>
 #include <random>
 #include <thread>
-#include <typeinfo>
 #include <iostream>
 
 using Manager = std::vector<std::shared_ptr<Sprite>>;

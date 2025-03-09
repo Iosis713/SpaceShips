@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.26)
 project(SpaceShips)
 
 set(CXX_STANDARD_REQUIRED 20)
+set(CMAKE_CXX_COMPILER clang++-18)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(FLAGS -Werror -Wall -Wpedantic -Wextra)
 

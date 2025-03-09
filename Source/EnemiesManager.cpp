@@ -86,11 +86,11 @@ void EnemiesManager::organizeEnemies(const size_t level, const Spaceship& target
         auto temporaryManager = manager_;
         temporaryManager.erase(std::remove(temporaryManager.begin(), temporaryManager.end(), sprite), temporaryManager.end());
 
-        if(typeid(*sprite) == typeid(SelfSteering))
+        if(auto selfSteering = dynamic_pointer_cast<SelfSteering>(sprite))
         {
-            dynamic_pointer_cast<SelfSteering>(sprite)->aimTarget(target);
-            dynamic_pointer_cast<SelfSteering>(sprite)->regulateDirection();
-            dynamic_pointer_cast<SelfSteering>(sprite)->updatePosition();
+            selfSteering->aimTarget(target);
+            selfSteering->regulateDirection();
+            selfSteering->updatePosition();
             sprite->checkSpritesCollision(temporaryManager);
         }
         else

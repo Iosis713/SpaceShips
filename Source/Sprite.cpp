@@ -1,5 +1,3 @@
-#include <typeinfo>
-
 #include "Headers/Sprite.hpp"
 
 Sprite::Sprite(sf::Vector2f position, float rotation, sf::Vector2f size)
