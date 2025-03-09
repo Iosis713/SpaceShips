@@ -24,10 +24,10 @@ public:
     virtual ~SelfSteering() = default;
     
     void aimWithoutCollision(const Sprite& target,const std::vector<std::shared_ptr<Sprite>> obstacles);
-    void aimTarget(const Sprite& sprite);
-    void aimTarget(const std::shared_ptr<Sprite>& sprite_ptr);
+    virtual void aimTarget(const Sprite& sprite);
+    virtual void aimTarget(const std::shared_ptr<Sprite>& sprite_ptr);
     void draw(sf::RenderWindow& i_window) override;
-    void regulateDirection();
+    virtual void regulateDirection();
     
     int getRandom();
 

@@ -154,3 +154,8 @@ Sprite& Sprite::operator--()
     return *this;
 }
 
+bool Sprite::operator==(const Sprite& other) const
+{
+    return position_ == other.position_;
+}
+

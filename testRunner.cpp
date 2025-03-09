@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <tuple>
 import <vector>;
 
@@ -20,6 +21,22 @@ public:
     SelfSteering selfSteering{sf::Vector2f(500, 500)};
 protected:
 };
+
+struct SelfSteeringMock : public SelfSteering
+{
+    SelfSteeringMock(sf::Vector2f position) : SelfSteering(position){};
+    MOCK_METHOD(void, aimTarget, (const Sprite& target), (override));
+    MOCK_METHOD(void, regulateDirection, (), (override));
+};
+
+struct SelfSteeringMockFixture : public testing::TestWithParam<std::tuple<sf::Vector2f,float>>
+{
+    SelfSteeringMock selfSteeringMock{sf::Vector2f(500.f, 400.f)};
+    const std::vector<std::shared_ptr<Sprite>> obstacles {std::make_shared<Sprite>(sf::Vector2f(400.f, 300.f))
+                                                         ,std::make_shared<Sprite>(sf::Vector2f(700.f, 200.f))};
+
+};
+
 
 TEST(BulletsTest, killingTest)
 {
@@ -45,7 +62,7 @@ TEST(SpriteCollision, positiveTest1)
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "TEST");
     sprite1->draw(window);
     sprite2->draw(window);
-
+    
     ASSERT_TRUE(sprite1->checkCollision(sprite2));
 }
 
@@ -93,11 +110,20 @@ TEST_P(SelfSteeringFixture, regualteDirTest_turnLeft)
     Sprite sprite(std::get<0>(tuple));
     selfSteering.aimTarget(sprite);
     selfSteering.regulateDirection();
-    
     float expectedValue = std::get<1>(tuple);
 
     ASSERT_EQ(expectedValue, selfSteering.getRotation());
 }
+
+
+TEST_F(SelfSteeringMockFixture, aimWithoutCollisionTest)
+{
+    Sprite target(sf::Vector2f{600, 400});
+    EXPECT_CALL(selfSteeringMock, aimTarget(target)).Times(1);
+    EXPECT_CALL(selfSteeringMock, regulateDirection()).Times(1);
+    selfSteeringMock.aimWithoutCollision(target, obstacles);
+}
+
 
 INSTANTIATE_TEST_SUITE_P(RotationEQ, SelfSteeringFixture, testing::Values(
     std::make_tuple(sf::Vector2f(600, 400), 185),

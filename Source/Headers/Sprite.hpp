@@ -44,7 +44,7 @@ public:
     void setRotation(float const rotation);
 
     Sprite& operator--();
+    bool operator==(const Sprite& other) const;
 };
-
 #endif
 
