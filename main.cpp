@@ -1,8 +1,7 @@
-#include <iostream>
 #include <chrono>
 #include <thread>
 #include <string>
-#include <typeinfo>
+import <vector>;
 
 #include "Source/Headers/Sprite.hpp"
 #include "Source/Headers/Moveable.hpp"
@@ -17,6 +16,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Window.hpp>
+
 
 size_t LVL = 1;
 

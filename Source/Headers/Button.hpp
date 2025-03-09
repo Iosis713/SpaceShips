@@ -3,8 +3,8 @@
 #define BUTTON
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <string>
+import <vector>;
 
 class Button
 {

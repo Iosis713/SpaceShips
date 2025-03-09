@@ -1,7 +1,6 @@
-#include <iostream>
 #include <gtest/gtest.h>
 #include <tuple>
-#include <vector>
+import <vector>;
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

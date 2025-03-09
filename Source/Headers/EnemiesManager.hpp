@@ -8,11 +8,10 @@
 #include "Spaceship.hpp"
 
 #include <chrono>
-#include <vector>
+import <vector>;
 #include <memory>
 #include <random>
 #include <thread>
-#include <iostream>
 
 using Manager = std::vector<std::shared_ptr<Sprite>>;
 using Time = std::chrono::time_point<std::chrono::steady_clock>;

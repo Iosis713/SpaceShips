@@ -5,7 +5,7 @@ set(CXX_STANDARD_REQUIRED 20)
 set(CMAKE_CXX_COMPILER clang++-18)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(FLAGS -Werror -Wall -Wpedantic -Wextra)
+set(FLAGS -Werror -Wall -Wpedantic -Wextra -fmodules -Wno-experimental-header-units)
 
 find_package(GTest REQUIRED)
 
@@ -23,6 +23,9 @@ set(SRC         Source/Sprite.cpp
                 Source/Button.cpp
                 Source/Menu.cpp)
 
+set(PRECOMPILED_STL     -fmodule-file=../../Modules/vector.pcm
+                        )
+
 add_library(${PROJECT_NAME}-lib STATIC  ${SRC})
 
 add_executable(${PROJECT_NAME}  main.cpp)
@@ -37,9 +40,9 @@ target_link_libraries(TESTRUNNER PRIVATE ${GTEST_LIBRARIES}
                                          pthread)
 
 
-target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
-target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
-target_compile_options(TESTRUNNER   PRIVATE ${FLAGS})
+target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS} ${PRECOMPILED_STL})
+target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS} ${PRECOMPILED_STL})
+target_compile_options(TESTRUNNER   PRIVATE ${FLAGS} ${PRECOMPILED_STL})
 
 set_target_properties(${PROJECT_NAME}-lib   PROPERTIES
                                             CXX_STANDARD 20
@@ -53,3 +56,4 @@ set_target_properties(TESTRUNNER    PROPERTIES
                                     CXX_STANDARD 20
                                     CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_VERBOSE_MAKEFILE ON)

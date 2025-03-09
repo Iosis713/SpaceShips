@@ -6,7 +6,8 @@
 #include <cstdlib>
 #include <memory>
 #include <random>
-#include <vector>
+import <vector>;
+#include <iostream>
 
 #include "Controllable.hpp"
 #include "EnemiesManager.hpp"

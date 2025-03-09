@@ -2,7 +2,6 @@
 #ifndef SPRITE
 #define SPRITE
 
-#include <iostream>
 #include <memory>
 #include "Global.hpp"
 #include <SFML/Graphics.hpp>

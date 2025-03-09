@@ -3,6 +3,7 @@
 #define CONTROLLABLE
 
 #include "Moveable.hpp"
+import <vector>;
 
 class Controllable : public Moveable
 {

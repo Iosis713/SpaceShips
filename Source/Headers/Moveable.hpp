@@ -4,6 +4,7 @@
 
 #include "Sprite.hpp"
 #include <math.h>
+import <vector>;
 
 class Moveable : public Sprite
 {
