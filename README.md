@@ -1,4 +1,4 @@
-My first fully finished fame so far (with Menu etc.). Previous games were playable but not finishied with GUI interface. I have done it as a learning project using SFML library.
+My first fully finished game so far (with Menu etc.). Previous games were playable but not finishied with GUI interface. I have done it as a learning project using SFML library.
 I decided to write simply Indie game, as beeing able to track a progess is most satisfying event for me, what is quite simple with GUI.
 
 * Confirm menu option marked by green color by clicking enter
